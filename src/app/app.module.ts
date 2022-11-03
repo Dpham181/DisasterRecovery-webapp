@@ -11,6 +11,8 @@ import { LoginComponent } from './authenticateSystem/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ManagementComponent } from './operationSystem/management/management.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LogoutComponent } from './authenticateSystem/logout/logout.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,15 @@ import { HttpClientModule } from '@angular/common/http';
     TimecardComponent,
     LoginComponent,
     HomeComponent,
-    ManagementComponent
+    ManagementComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

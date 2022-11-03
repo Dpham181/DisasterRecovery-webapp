@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { JobComponent } from './operationSystem/job/job.component';
 import { MachineComponent } from './operationSystem/machine/machine.component';
 import { ManagementComponent } from './operationSystem/management/management.component';
+import { RouteGGuard } from './RouteGraud/route-g.guard';
 
 const routes: Routes = [
 
@@ -17,7 +18,7 @@ const routes: Routes = [
    ]
   },
 
-  {path:'management', component:ManagementComponent,
+  {path:'management', component:ManagementComponent, canActivate : [RouteGGuard]   , canActivateChild:[RouteGGuard] ,
 
   children:[
     {path:'job', component:JobComponent},
