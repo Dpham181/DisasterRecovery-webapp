@@ -1,0 +1,50 @@
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">LOGIN FORM</h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"><div class="card ">
+            <div class="card-body">
+           
+              <div>
+
+                <form [formGroup]="login " (ngSubmit)="submit(login)" autocomplete=”off” >
+                    <!-- Email input -->
+                    <div class="form-outline mb-4" >
+                      <input type="email" id="form1Example1"  class="form-control" formControlName = "email"  [class.is-invalid]="email.invalid && email.touched" />
+                      <label class="form-label" for="form1Example1">Email address</label>
+                      <div *ngIf="email.errors && email.touched">
+                        <div class="alert alert-danger" *ngIf="email.errors?.required">Please input email</div>
+                        <div class="alert alert-danger" *ngIf="email.errors?.email">@.example</div>
+                      </div>
+                    </div>
+                   
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                      <input type="password" id="form1Example2" [class.is-invalid]="password.invalid && password.touched" class="form-control" formControlName = "password" />
+                      <label class="form-label" for="form1Example2">Password</label>
+                      <div *ngIf="password.errors && password.touched">
+                        <div class="alert alert-danger" *ngIf="password.errors?.required">Please enter your password</div>
+                        <div class="alert alert-danger" *ngIf="password.errors?.minlength">Password must be longer than 6 characters</div>
+                      </div>
+                    </div>
+                  
+                    
+                  
+                    <!-- Submit button -->
+                    <button type="submit" [disabled]="!login.valid" class="btn btn-primary btn-block">Sign in</button>
+                  </form>
+                  </div>
+           
+        </div>
+        </div></div>
+      
+      </div>
+    </div>
+  </div>
