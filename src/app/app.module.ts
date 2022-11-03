@@ -17,6 +17,12 @@ import { CreateJobFormComponent } from './operationSystem/job/create-job-form/cr
 import { EditJobFormComponent } from './operationSystem/job/edit-job-form/edit-job-form.component';
 import { CreateMachineFormComponent } from './operationSystem/machine/create-machine-form/create-machine-form.component';
 import { EditMachineFormComponent } from './operationSystem/machine/edit-machine-form/edit-machine-form.component';
+import { AccessComponent } from './operationSystem/access/access.component';
+import { HourPipe } from './pipes/hour.pipe';
+import { MoneyPipe } from './pipes/money.pipe';
+import { RatePipe } from './pipes/rate.pipe';
+import { ToalhoursPipe } from './pipes/toalhours.pipe';
+import { ClickActiveDirective } from './drective/click-active.directive';
 
 
 
@@ -33,7 +39,13 @@ import { EditMachineFormComponent } from './operationSystem/machine/edit-machine
     CreateJobFormComponent,
     EditJobFormComponent,
     CreateMachineFormComponent,
-    EditMachineFormComponent
+    EditMachineFormComponent,
+    AccessComponent,
+    HourPipe,
+    MoneyPipe,
+    RatePipe,
+    ToalhoursPipe,
+    ClickActiveDirective
   ],
   imports: [
     BrowserModule,

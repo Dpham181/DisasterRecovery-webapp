@@ -10,8 +10,9 @@ export class RouteGGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (localStorage.getItem('JWT_token') === null) {      
-        this.router.navigate(['/login']);      
+      
+      if (localStorage.getItem('JWT_token') === null && localStorage.getItem('role') === null) {      
+        this.router.navigate(['/home']);      
         return false;
       }
     
@@ -19,13 +20,11 @@ export class RouteGGuard implements CanActivate {
   }
   canActivateChild(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean|UrlTree {
-      /*
-      console.log(localStorage.getItem('role'))
-      if (localStorage.getItem('role') !== "admin") {
+      if (localStorage.getItem('role') !== "Admin") {
         alert('You are not allowed to view this page');
         return false;
       }
-      */
+      
       return true;
   }
   

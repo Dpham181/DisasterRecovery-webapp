@@ -12,9 +12,9 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("here")
-    localStorage.setItem('isLoggedIn','false');    
-
-    this.router.navigate(['home']);
+    localStorage.setItem('JWT_token',"");    
+    localStorage.setItem('role',"");    
+    this.router.navigate(['/home']);
   }
 
 }

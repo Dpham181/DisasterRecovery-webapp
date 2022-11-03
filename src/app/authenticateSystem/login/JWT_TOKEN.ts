@@ -1,5 +1,5 @@
 export interface JWT_token{
-    token:string
-
+    jwttoken:string
+    role:string
 
 }

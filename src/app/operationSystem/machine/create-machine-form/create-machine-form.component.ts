@@ -16,7 +16,6 @@ export class CreateMachineFormComponent implements OnInit {
   constructor(private machineSer: MachineserviceService, private fb:FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
-    localStorage.setItem("JWT_token", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2Njc0ODUyMTMsImlhdCI6MTY2NzQ2NzIxM30.S5-97XjLkFRuvpXSPdNQ5TUQhy2LJIGlZmE9On1KJZVzFnucWfFWgRnNQ879P50ZT1nTjS7ZsDI8NLnTcHQCXQ");
     this.machineSer.ListOfMachines.subscribe({
       next: (v) => {this.machines=v; console.log(v)},
       error: (e) => console.error(e),

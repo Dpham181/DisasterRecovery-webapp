@@ -14,7 +14,6 @@ import { JWT_token } from './JWT_TOKEN';
 export class LoginComponent implements OnInit {
  
   public login: any;
-  private token:any ;
   constructor(private fb: FormBuilder, private userS:AuthenticateServiceService , private router:Router) { 
     this.login = this.fb.group({
       email: new FormControl(null,   [Validators.required,Validators.email]),
@@ -28,14 +27,24 @@ export class LoginComponent implements OnInit {
   submit(login:any){
     this.userS.authenticateMethod(new user(this.login.value.email, this.login.value.password)).subscribe(
       {
-      next: (v) => {this.token= v.token,console.log(v.token)
-        if(v.token.length > 0 ){
-        localStorage.setItem('JWT_token',v.token);    
-        this.router.navigate(['/management']);
+      next: (v) => {console.log(v.jwttoken)
+        if(v.jwttoken.length > 0 ){
+        localStorage.setItem('JWT_token',v.jwttoken);    
+        localStorage.setItem('role',v.role);    
+        if(v.role == "Admin")
+        this.router.navigate(['/management/job']).then(() => {
+          window.location.reload();
+        });
+        if(v.role == "User")
+        this.router.navigate(['/access']).then(() => {
+          window.location.reload();
+        });
+
         }
+        
 
       },
-      error: (e) => console.error(e),
+      error: (e) => alert(e),
       complete: () => console.info('complete') 
     }
 

@@ -14,11 +14,7 @@ export class AuthenticateServiceService {
 
   constructor(private httpClient: HttpClient) { }  
 
-  get ListOfUser():Observable<user[]>{
-    return this.httpClient.get<user[]>(this.API_URL).pipe(
-      catchError(new Api().handleError)
-    );
-  }
+
 
   authenticateMethod(user:user):Observable<JWT_token>{
 
