@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TimecardserviceService } from './service/timecardservice.service';
 @Component({
   selector: 'app-timecard',
@@ -10,7 +11,7 @@ export class TimecardComponent implements OnInit {
   public timecards: any;
   errorMsg: any;
 
-  constructor(private tcSer: TimecardserviceService) { }
+  constructor(private tcSer: TimecardserviceService, private router:Router) { }
 
   ngOnInit(): void {
     this.tcSer.ListOfTimecards.subscribe({
@@ -20,4 +21,7 @@ export class TimecardComponent implements OnInit {
     )
   }
 
+  editTimecard(tc:any) {
+    this.router.navigate(["/management/editTimecard/", tc.id]);
+  }
 }

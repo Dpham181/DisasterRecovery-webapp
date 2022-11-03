@@ -13,6 +13,7 @@ import { MachineComponent } from './operationSystem/machine/machine.component';
 import { ManagementComponent } from './operationSystem/management/management.component';
 import { TimecardComponent } from './operationSystem/timecard/timecard.component';
 import { RouteGGuard } from './RouteGraud/route-g.guard';
+import { TimecardViewUpdateComponent } from './operationSystem/timecard/timecard-view-update/timecard-view-update.component';
 
 const routes: Routes = [
 
@@ -48,7 +49,8 @@ const routes: Routes = [
     {path: 'editJob/:id', component:EditJobFormComponent},
     {path: 'newMachine', component:CreateMachineFormComponent},
     {path: 'editMachine/:id', component:EditMachineFormComponent},
-    {path:'logout', component:LogoutComponent}
+    {path:'logout', component:LogoutComponent},
+    {path: 'editTimecard/:id', component:TimecardViewUpdateComponent}
 
 
   ]

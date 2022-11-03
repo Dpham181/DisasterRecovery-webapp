@@ -19,4 +19,28 @@ export class TimecardserviceService {
       catchError(new Api().handleError)
     );
   }
+  
+  getTimecards(): Observable<timecard[]>{
+    return this.httpClient.get<timecard[]>(this.API_URL, {headers: this.headers})
+    .pipe(catchError(new Api().handleError));
+  }
+
+  getTimecardById(id: number): Observable<timecard[]>{
+    return this.httpClient.get<timecard[]>(this.API_URL+ '/' + id,  {headers: this.headers})
+    .pipe(catchError(new Api().handleError));
+  }
+
+  addTimecard(timecardData: any): Observable<timecard[]>{
+  
+    console.log(timecardData);
+    return this.httpClient.post<timecard[]>(this.API_URL, timecardData, {headers: this.headers})
+    .pipe(catchError(new Api().handleError));
+  }
+
+  updateTimecard(id: number, timecardData: any): Observable<timecard[]>{
+    console.log(timecardData)
+    console.log(this.API_URL + '/' + id)
+    return this.httpClient.put<timecard[]>(this.API_URL + '/' + id, timecardData, {headers: this.headers})
+    .pipe(catchError(new Api().handleError));
+  }
 }
