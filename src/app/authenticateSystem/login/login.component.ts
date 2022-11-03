@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit {
         if(v.jwttoken.length > 0 ){
         localStorage.setItem('JWT_token',v.jwttoken);    
         localStorage.setItem('role',v.role);    
+        localStorage.setItem('email',this.login.value.email);    
+
         if(v.role == "Admin")
         this.router.navigate(['/management/job']).then(() => {
           window.location.reload();

@@ -14,6 +14,8 @@ export class LogoutComponent implements OnInit {
     console.log("here")
     localStorage.setItem('JWT_token',"");    
     localStorage.setItem('role',"");    
+    localStorage.setItem('email',"");    
+
     this.router.navigate(['/home']);
   }
 

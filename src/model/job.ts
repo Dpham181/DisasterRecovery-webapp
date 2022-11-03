@@ -17,6 +17,14 @@ export class job {
     return this.hours;
    }
 
+   get _code(){
+    return this.code;
+   }
+
+   get _rate(){
+    return this.rate;
+   }
+
 
   
 }

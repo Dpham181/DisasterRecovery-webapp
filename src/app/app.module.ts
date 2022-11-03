@@ -12,7 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { ManagementComponent } from './operationSystem/management/management.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LogoutComponent } from './authenticateSystem/logout/logout.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateJobFormComponent } from './operationSystem/job/create-job-form/create-job-form.component';
 import { EditJobFormComponent } from './operationSystem/job/edit-job-form/edit-job-form.component';
 import { CreateMachineFormComponent } from './operationSystem/machine/create-machine-form/create-machine-form.component';
@@ -58,7 +58,8 @@ import { TimecardCreationComponent } from './operationSystem/timecard/timecard-c
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule, 
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

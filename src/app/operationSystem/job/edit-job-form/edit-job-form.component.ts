@@ -20,7 +20,6 @@ export class EditJobFormComponent implements OnInit {
     {code: '', description: '', rate: '', hours:''}
   )
   ngOnInit(): void {
-    localStorage.setItem("JWT_token", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2Njc0ODUyMTMsImlhdCI6MTY2NzQ2NzIxM30.S5-97XjLkFRuvpXSPdNQ5TUQhy2LJIGlZmE9On1KJZVzFnucWfFWgRnNQ879P50ZT1nTjS7ZsDI8NLnTcHQCXQ");
   
     this.actRoute.paramMap.subscribe((params: ParamMap) => {
       let id = params.get('id');

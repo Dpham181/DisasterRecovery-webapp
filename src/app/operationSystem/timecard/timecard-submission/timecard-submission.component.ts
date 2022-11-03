@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TimecardserviceService } from '../service/timecardservice.service';
 
 @Component({
   selector: 'app-timecard-submission',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimecardSubmissionComponent implements OnInit {
 
-  constructor() { }
+  public timecards: any;
+  errorMsg: any;
+
+  constructor(private tcSer: TimecardserviceService) { }
 
   ngOnInit(): void {
+    this.tcSer.ListOfTimecards.subscribe({
+      next: (tc) => {this.timecards=tc; console.log(tc)},
+      error: (e) => console.error(e),
+      complete: () => console.info('complete') }
+    )
   }
-
+  createTimeCard(){
+    
+  }
 }

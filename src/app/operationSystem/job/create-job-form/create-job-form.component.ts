@@ -18,7 +18,6 @@ export class CreateJobFormComponent implements OnInit {
   constructor(private jobSer: JobserviceService, private fb:FormBuilder, private router:Router) {}
 
   ngOnInit(): void {
-    localStorage.setItem("JWT_token", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2Njc0ODUyMTMsImlhdCI6MTY2NzQ2NzIxM30.S5-97XjLkFRuvpXSPdNQ5TUQhy2LJIGlZmE9On1KJZVzFnucWfFWgRnNQ879P50ZT1nTjS7ZsDI8NLnTcHQCXQ");
     this.jobSer.ListOfJobs.subscribe({
       next: (v) => {this.jobs=v; console.log(v)},
       error: (e) => console.error(e),

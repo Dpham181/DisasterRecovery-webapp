@@ -1,1 +1,99 @@
-<p>timecard-creation works!</p>
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="TimecardModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">TIMECARD FORM</h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"><div class="card ">
+            <div class="card-body">
+           
+              <div>
+
+                <form [formGroup]="timecardForm" (ngSubmit)="onSubmit(timecardForm)">
+                    <div class="row mb-4">
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="text" id="form6Example1" class="form-control" formControlName ="code"/>
+                            <label class="form-label" for="form6Example1" >Side Code</label>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="text" id="form6Example2" class="form-control" formControlName ="contractor" />
+                            <label class="form-label" for="form6Example2">Contractor Name</label>
+                          </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                              <input type="date" id="form6Example2" class="form-control" formControlName ="date"/>
+                            </div>
+                          </div>
+                    </div>
+                    <div> <h2> Jobs </h2> </div>
+                    <div *ngFor= "let div of [0,1,2]; let i= index " class="row mb-4">
+
+                        <div class="col">
+                            <select class="form-select" aria-label="Default select example"  [(ngModel)]="jobcode" [ngModelOptions]="{standalone: true}" name ="jobcode">
+                                <option  *ngFor="let job of jobs" value="{{job.code}}">{{job.code}}</option>
+                          
+                              </select>
+                            
+                        </div>
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="number" id="form6Example2" class="form-control"/>
+                            <label class="form-label" for="form6Example2">{{jobcode}}</label>
+                          </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                              <input type="number" id="form6Example2" class="form-control"   />
+                              <label class="form-label" for="form6Example2">{{jobworkedhour}}</label>
+                            </div>
+                          </div>
+                    </div>
+                    
+                   
+                    <div> <h2> Machine </h2> </div>
+
+                    <div *ngFor= "let div of [1,2,3] ; " class="row mb-4">
+
+                        <div class="col">
+                            <select class="form-select" aria-label="Default select example">
+                                <option  *ngFor="let machine of machines" value="{{machine.code}}">{{machine.code}}</option>
+
+                              </select>
+                            
+                        </div>
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="number" id="form6Example2" class="form-control" />
+                            <label class="form-label" for="form6Example2">Hrs. Worked</label>
+                          </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                              <input type="number" id="form6Example2" class="form-control" />
+                              <label class="form-label" for="form6Example2">Total</label>
+                            </div>
+                          </div>
+                    </div>
+                    
+                      <!-- Submit button -->
+                      <button type="submit" class="btn btn-primary btn-block mb-4">Submmit</button>
+                      <button type="submit" class="btn btn-primary btn-block mb-4">Clear</button>
+
+                  </form>
+                  </div>
+           
+        </div>
+        </div></div>
+      
+      </div>
+    </div>
+  </div>
