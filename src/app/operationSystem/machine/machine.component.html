@@ -1,1 +1,49 @@
-<p>machine works!</p>
+<div>
+  <button (click)="createMachine()" type="button" class="btn btn-link btn-sm btn-rounded">
+    Create
+  </button>
+</div>
+<table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <th>ID</th>
+        <th>Machine Code</th>
+        <th>Description</th>
+        <th>Hourly Rent</th>
+        <th>Max Hours Per Day</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let machine of machines">
+        <td>
+          <div class="d-flex align-items-center">
+          
+            <div class="ms-3">
+              <p class="fw-bold mb-1">{{machine.id}}</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{machine.code}}</p>
+        </td>
+        <td>
+          <span class="badge badge-success rounded-pill d-inline">{{machine.description}}</span>
+        </td>
+        <td>{{machine.rent}}</td>
+        <td>{{machine.hours}}</td>
+
+        <td>
+          <button (click)="editMachine(machine)" type="button" class="btn btn-link btn-sm btn-rounded">
+            Edit
+          </button>
+        </td>
+
+        <td>
+          <button (click)="deleteMachine(machine.id)" type="button" class="btn btn-link btn-sm btn-rounded">
+            Delete
+          </button>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
