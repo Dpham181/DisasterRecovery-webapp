@@ -17,6 +17,7 @@ const routes: Routes = [
 
    ]
   },
+ // { path: '**', component: null },  // Wildcard route for a 404 page
 
   {path:'management', component:ManagementComponent, canActivate : [RouteGGuard]   , canActivateChild:[RouteGGuard] ,
 

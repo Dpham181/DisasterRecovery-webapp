@@ -19,11 +19,13 @@ export class RouteGGuard implements CanActivate {
   }
   canActivateChild(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean|UrlTree {
+      /*
       console.log(localStorage.getItem('role'))
       if (localStorage.getItem('role') !== "admin") {
         alert('You are not allowed to view this page');
         return false;
       }
+      */
       return true;
   }
   
