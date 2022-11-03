@@ -23,6 +23,9 @@ import { MoneyPipe } from './pipes/money.pipe';
 import { RatePipe } from './pipes/rate.pipe';
 import { ToalhoursPipe } from './pipes/toalhours.pipe';
 import { ClickActiveDirective } from './drective/click-active.directive';
+import { TimecardSubmissionComponent } from './operationSystem/timecard/timecard-submission/timecard-submission.component';
+import { TimecardViewUpdateComponent } from './operationSystem/timecard/timecard-view-update/timecard-view-update.component';
+import { TimecardCreationComponent } from './operationSystem/timecard/timecard-creation/timecard-creation.component';
 
 
 
@@ -45,7 +48,10 @@ import { ClickActiveDirective } from './drective/click-active.directive';
     MoneyPipe,
     RatePipe,
     ToalhoursPipe,
-    ClickActiveDirective
+    ClickActiveDirective,
+    TimecardSubmissionComponent,
+    TimecardViewUpdateComponent,
+    TimecardCreationComponent
   ],
   imports: [
     BrowserModule,
