@@ -20,6 +20,13 @@ export class AuthenticateServiceService {
     );
   }
 
+  authenticateMethod(user:user):Observable<string>{
+
+
+    return this.httpClient.post<string>(this.API_URL,user).pipe(
+      catchError(new Api().handleError)
+    );
+  }
   
 
 }
