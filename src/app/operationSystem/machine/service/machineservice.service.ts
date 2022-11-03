@@ -20,4 +20,34 @@ export class MachineserviceService {
       catchError(new Api().handleError)
     );
   }
+
+  deleteOneMachine(id:number):Observable<any> {
+    console.log(this.API_URL + "/" + id);
+    return this.httpClient.delete(this.API_URL + "/" + id, {headers: this.headers}).pipe(
+      catchError(new Api().handleError)
+    );
+  }
+  getMachines(): Observable<machine[]>{
+    return this.httpClient.get<machine[]>(this.API_URL, {headers: this.headers})
+    .pipe(catchError(new Api().handleError));
+  }
+
+  getMachineById(id: number): Observable<machine[]>{
+    return this.httpClient.get<machine[]>(this.API_URL+ '/' + id,  {headers: this.headers})
+    .pipe(catchError(new Api().handleError));
+  }
+
+  addMachine(machineData: any): Observable<machine[]>{
+  
+    console.log(machineData);
+    return this.httpClient.post<machine[]>(this.API_URL, machineData, {headers: this.headers})
+    .pipe(catchError(new Api().handleError));
+  }
+
+  updateMachine(id: number, machineData: any): Observable<machine[]>{
+    console.log(machineData)
+    console.log(this.API_URL + '/' + id)
+    return this.httpClient.put<machine[]>(this.API_URL + '/' + id, machineData, {headers: this.headers})
+    .pipe(catchError(new Api().handleError));
+  }
 }

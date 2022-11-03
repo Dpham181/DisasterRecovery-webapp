@@ -9,7 +9,7 @@ import { timecard } from 'src/model/timecard';
   providedIn: 'root'
 })
 export class TimecardserviceService {
-  private API_URL= environment.API_URL + "timecards";
+  private API_URL= environment.API_URL + "TimeCards";
   private headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('JWT_token'));
 
   constructor(private httpClient: HttpClient) { }

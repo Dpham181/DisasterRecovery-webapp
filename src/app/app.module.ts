@@ -13,6 +13,12 @@ import { ManagementComponent } from './operationSystem/management/management.com
 import { HttpClientModule } from '@angular/common/http';
 import { LogoutComponent } from './authenticateSystem/logout/logout.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreateJobFormComponent } from './operationSystem/job/create-job-form/create-job-form.component';
+import { EditJobFormComponent } from './operationSystem/job/edit-job-form/edit-job-form.component';
+import { CreateMachineFormComponent } from './operationSystem/machine/create-machine-form/create-machine-form.component';
+import { EditMachineFormComponent } from './operationSystem/machine/edit-machine-form/edit-machine-form.component';
+
+
 
 @NgModule({
   declarations: [
@@ -23,7 +29,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     HomeComponent,
     ManagementComponent,
-    LogoutComponent
+    LogoutComponent,
+    CreateJobFormComponent,
+    EditJobFormComponent,
+    CreateMachineFormComponent,
+    EditMachineFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,8 @@
+<div>
+  <button (click)="createMachine()" type="button" class="btn btn-link btn-sm btn-rounded">
+    Create
+  </button>
+</div>
 <table class="table align-middle mb-0 bg-white">
     <thead class="bg-light">
       <tr>
@@ -24,12 +29,18 @@
         <td>
           <span class="badge badge-success rounded-pill d-inline">{{machine.description}}</span>
         </td>
-        <td>{{machine.rate}}</td>
+        <td>{{machine.rent}}</td>
         <td>{{machine.hours}}</td>
 
         <td>
-          <button type="button" class="btn btn-link btn-sm btn-rounded">
+          <button (click)="editMachine(machine)" type="button" class="btn btn-link btn-sm btn-rounded">
             Edit
+          </button>
+        </td>
+
+        <td>
+          <button (click)="deleteMachine(machine.id)" type="button" class="btn btn-link btn-sm btn-rounded">
+            Delete
           </button>
         </td>
       </tr>
