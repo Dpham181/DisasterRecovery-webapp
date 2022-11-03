@@ -3,26 +3,33 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserComponent } from './user/user.component';
-import { RoleComponent } from './role/role.component';
-import { JobComponent } from './job/job.component';
-import { MachineComponent } from './machine/machine.component';
-import { TimecardComponent } from './timecard/timecard.component';
+import { JobComponent } from './operationSystem/job/job.component';
+import { MachineComponent } from './operationSystem/machine/machine.component';
+import { TimecardComponent } from './operationSystem/timecard/timecard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './authenticateSystem/login/login.component';
+import { HomeComponent } from './home/home.component';
+import { ManagementComponent } from './operationSystem/management/management.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
-    RoleComponent,
     JobComponent,
     MachineComponent,
-    TimecardComponent
+    TimecardComponent,
+    LoginComponent,
+    HomeComponent,
+    ManagementComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
