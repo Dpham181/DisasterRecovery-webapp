@@ -14,12 +14,8 @@ import { MachineComponent } from './operationSystem/machine/machine.component';
 import { ManagementComponent } from './operationSystem/management/management.component';
 import { TimecardComponent } from './operationSystem/timecard/timecard.component';
 import { RouteGGuard } from './RouteGraud/route-g.guard';
-<<<<<<< Updated upstream
-import { TimecardViewUpdateComponent } from './operationSystem/timecard/timecard-view-update/timecard-view-update.component';
-=======
 import { TimecardCreationComponent } from './operationSystem/timecard/timecard-creation/timecard-creation.component';
 import { TimecardSubmissionComponent } from './operationSystem/timecard/timecard-submission/timecard-submission.component';
->>>>>>> Stashed changes
 
 const routes: Routes = [
 
