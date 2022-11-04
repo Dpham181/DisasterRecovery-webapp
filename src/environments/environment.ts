@@ -4,8 +4,8 @@
 
 export const environment = 
 {
-    production: false,
-    API_URL: 'http://localhost:8083/',
+    production: true,
+    API_URL: 'http://44.227.138.24:8080/DisasterRecovery/',
 };
 
 /*

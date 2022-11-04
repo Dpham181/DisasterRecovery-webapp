@@ -11,13 +11,13 @@
         </th>
       </tr>
     </thead>
-    <tbody >
-      <tr *ngFor="let job of jobs" appClickActive>
+    <tbody *ngIf="jobs">
+      <tr *ngFor="let job of jobs ; let i = index" appClickActive   >
         <td>
           <div class="d-flex align-items-center">
           
             <div class="ms-3">
-              <p class="fw-bold mb-1">{{job.id}}</p>
+              <p class="fw-bold mb-1">{{i+1}}</p>
             </div>
           </div>
         </td>

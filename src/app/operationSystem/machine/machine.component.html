@@ -11,13 +11,13 @@
         </th>
       </tr>
     </thead>
-    <tbody >
-      <tr appClickActive *ngFor="let machine of machines">
+    <tbody *ngIf="machines">
+      <tr appClickActive *ngFor="let machine of machines ; let i = index">
         <td>
           <div class="d-flex align-items-center">
           
             <div class="ms-3">
-              <p class="fw-bold mb-1">{{machine.id}}</p>
+              <p class="fw-bold mb-1">{{i+1}}</p>
             </div>
           </div>
         </td>

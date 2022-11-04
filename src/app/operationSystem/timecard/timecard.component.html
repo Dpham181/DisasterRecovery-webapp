@@ -9,8 +9,8 @@
         <th>Status</th>
       </tr>
     </thead>
-    <tbody >
-      <tr appClickActive *ngFor="let tc of timecards">
+    <tbody *ngIf="timecards" >
+      <tr appClickActive *ngFor="let tc of timecards; let i = index">
         <td>
           <div class="d-flex align-items-center">
           

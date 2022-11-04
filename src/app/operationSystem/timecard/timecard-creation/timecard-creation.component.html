@@ -21,6 +21,7 @@
                             <input type="text" id="form6Example1" class="form-control" formControlName ="code"/>
                             <label class="form-label" for="form6Example1" >Side Code</label>
                           </div>
+
                         </div>
                         <div class="col">
                           <div class="form-outline">
@@ -35,8 +36,11 @@
                           </div>
                     </div>
                     <div>
-                    <div> <h3> Jobs </h3> </div>
-                    <ng-container formArrayName="jobsForm">
+                    <div  id="jobform" class="form-outline"> 
+                      <label class="form-label" for="form6Example2"><h3>Labor Entry</h3></label>
+
+                     <div class="form-control">
+                      <ng-container formArrayName="jobsForm" >
                         <ng-container *ngFor="let jobForm of jobsForm.controls; let i = index">
                           <div formGroupName="{{i}}">
                             
@@ -44,7 +48,7 @@
                               <div class="col">
                                 <div class="form-outline">
                                   <label class="form-label" for="form6Example2">Job Code</label>
-                                  <select   (change)="onChangeRate($event)"  class="form-select" aria-label="Default select example" formControlName ="JobCode" >
+                                  <select   (change)="onChangeRate($event)"   class="form-select" aria-label="Default select example" formControlName ="JobCode" >
                                     <option *ngFor="let job of jobs" value="{{job.id}}">{{job.code}}</option>
                                    
                                   </select>
@@ -53,7 +57,7 @@
                               <div class="col">
                                 <div class="form-outline">
                                   <label class="form-label" for="form6Example2">Hours</label>
-                                  <input type="number" (change)="onChangeHour($event)" id="form6Example2" class="form-control" formControlName ="JobHours" />
+                                  <input type="number" (change)="onChangeHour($event)"  id="form6Example2" class="form-control" formControlName ="JobHours" />
                                   
                                 </div>
                               </div>
@@ -68,12 +72,17 @@
                           </div>
                         </div>
 
+                        <button  (click)="addJobs()">add</button>
 
                           </ng-container>
 
                 </ng-container>
+                  </div>
                     
-                <button  (click)="addJobs()">add</button>
+
+                    </div>
+                 
+                    
                 </div>
                 <div>
                 <div> <h3> Machines </h3> </div>

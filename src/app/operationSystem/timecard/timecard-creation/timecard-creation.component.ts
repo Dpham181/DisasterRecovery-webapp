@@ -188,12 +188,7 @@ export class TimecardCreationComponent implements OnInit {
     )
  
   
-    this.router.navigate(['/access/Timecardsubmisstion']).then(() => {
-      this.timecardForm.reset();
-
-      window.location.reload();
-    });;
-    
+    this.router.navigate(['/access/Timecardsubmisstion']);
 
   }
   reset(){
