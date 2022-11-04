@@ -6,7 +6,7 @@ import { TimecardserviceService } from './../service/timecardservice.service';
 import { timecard } from 'src/model/timecard';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-timecard-creation',
@@ -18,14 +18,7 @@ export class TimecardCreationComponent implements OnInit {
   public timecardForm: any;
   timecards: any;
   jobs:any;
-  jobcode!:string;
-  jobrate!:number;
-  totaljobworked!:number;
-  jobworkedhour!: number;
-
- machines:any;
-  errorMsg: any;
-  
+  machines:any;
 
   constructor(private timecardS: TimecardserviceService,private jobSer:JobserviceService ,private machineSer:MachineserviceService ,  private fb:FormBuilder, private router:Router) {}
 
@@ -36,44 +29,119 @@ export class TimecardCreationComponent implements OnInit {
       complete: () => console.info('complete') }
     );
 
+
+   
     this.machineSer.ListOfMachines.subscribe({
       next: (m) => {this.machines = m; console.log(m)},
       error: (e) => console.error(e),
       complete: () => console.info('complete') 
     }
     )
-    this.timecardForm = this.fb.group({code: '', contractor: '', date: '', hours:''})
+    this.timecardForm = this.fb.group(
+      
+    { 
+      code: ['', Validators.required],
+      contractor: ['', Validators.required],
+      date: ['', Validators.required],
+      jobsForm: this.fb.array([this.fb.group({
+        JobCode: ['', Validators.required],
+        JobHours: ['', Validators.required],
+        JobTotal: ['', Validators.required]
   
+      })]),
+    
+      MachinesForm: this.fb.array([this.fb.group({
+        MachineCode: ['', Validators.required],
+        MachineHours: ['', Validators.required],
+        MachineTotal: ['', Validators.required]
+  
+      })])
+    },)
+     
+
+
   }
-  
+  /*
+  onChange(event:any) {
+      this.jobcodeChossenrate = event.target.value;
+      console.log(this.jobcodeChossenrate)
+      console.log(this.jobworkedhour)
+
+      this.totaljobworked = Number(this.jobcodeChossenrate) * this.jobworkedhour;
+
+  }
+  */
+  get jobsForm() {
+    return this.timecardForm.controls["jobsForm"] as FormArray;
+  }
+
+  addJobs() {
+    const jobForm = this.fb.group({
+      JobCode: ['', Validators.required],
+      JobHours: ['', Validators.required],
+      JobTotal: ['', Validators.required]
+
+    });
+    this.jobsForm.push(jobForm);
+  }
+
+
+  get MachinesForm() {
+    return this.timecardForm.controls["MachinesForm"] as FormArray;
+  }
+
+  addMachines() {
+    const MachineForm = this.fb.group({
+      MachineCode: ['', Validators.required],
+      MachineHours: ['', Validators.required],
+      MachineTotal: ['', Validators.required]
+
+    });
+    this.MachinesForm.push(MachineForm);
+  }
   onSubmit(timecardForm:any)
   {
     console.log(this.timecardForm.value);
-   
+    var item = (<FormArray>this.timecardForm.get('jobsForm')).at(0);
+    console.log(item);
+
   }
-  calJobtotal(){
-   this.jobs.array.forEach((_job: job) => {
-      if(_job._code === this.jobcode )
-      {
-       this.totaljobworked =  this.jobrate * this.jobworkedhour;
-      }
-   });
+ 
+  get JobCode()
+  {
+    return this.timecardForm.get('JobCode');
+  }
+  get JobHours()
+  {
+    return this.timecardForm.get('JobHours');
+  }
+  get JobTotal()
+  {
+    return this.timecardForm.get('JobTotal');
+  }
+  get MachineCode()
+  {
+    return this.timecardForm.get('MachineCode');
+  }
+  get MachineHours()
+  {
+    return this.timecardForm.get('MachineHours');
+  }
+  get MachineTotal()
+  {
+    return this.timecardForm.get('MachineTotal');
   }
   get code()
   {
     return this.timecardForm.get('code');
   }
-  get description()
+  get contractor()
   {
-    return this.timecardForm.get('description');
+    return this.timecardForm.get('contractor');
   }
-  get rate()
+  get date()
   {
-    return this.timecardForm.get('rate');
-  }
-  get hours()
-  {
-    return this.timecardForm.get('hours');
+    return this.timecardForm.get('date');
   }
 
 }
