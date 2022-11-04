@@ -17,8 +17,9 @@
                 <form [formGroup]="login " (ngSubmit)="submit(login)" autocomplete=”off” >
                     <!-- Email input -->
                     <div class="form-outline mb-4" >
-                      <input type="email" id="form1Example1"  class="form-control" formControlName = "email"  [class.is-invalid]="email.invalid && email.touched" />
                       <label class="form-label" for="form1Example1">Email address</label>
+                      <input type="email" id="form1Example1"  class="form-control" formControlName = "email"  [class.is-invalid]="email.invalid && email.touched" />
+                      
                       <div *ngIf="email.errors && email.touched">
                         <div class="alert alert-danger" *ngIf="email.errors?.required">Please input email</div>
                         <div class="alert alert-danger" *ngIf="email.errors?.email">@.example</div>
@@ -27,8 +28,9 @@
                    
                     <!-- Password input -->
                     <div class="form-outline mb-4">
-                      <input type="password" id="form1Example2" [class.is-invalid]="password.invalid && password.touched" class="form-control" formControlName = "password" />
                       <label class="form-label" for="form1Example2">Password</label>
+                      <input type="password" id="form1Example2" [class.is-invalid]="password.invalid && password.touched" class="form-control" formControlName = "password" />
+                      
                       <div *ngIf="password.errors && password.touched">
                         <div class="alert alert-danger" *ngIf="password.errors?.required">Please enter your password</div>
                         <div class="alert alert-danger" *ngIf="password.errors?.minlength">Password must be longer than 6 characters</div>

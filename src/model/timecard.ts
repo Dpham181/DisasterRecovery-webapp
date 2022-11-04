@@ -6,6 +6,11 @@ export class timecard {
         return this.id;
     }
 
+    get _rate()
+    {
+        return this.hours;
+    }
+
 
     set _code(value:string){
         this.code = value;
@@ -28,6 +33,9 @@ export class timecard {
     }
     set _timecardMachine(value:any){
         this.timecardMachine= value;
+    }
+    set _status(value:any){
+        this.status = value;
     }
 
 }

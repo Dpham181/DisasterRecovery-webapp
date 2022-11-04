@@ -43,6 +43,7 @@
                             <div class="row mb-4">
                               <div class="col">
                                 <div class="form-outline">
+                                  <label class="form-label" for="form6Example2">Job Code</label>
                                   <select   (change)="onChangeRate($event)"  class="form-select" aria-label="Default select example" formControlName ="JobCode" >
                                     <option *ngFor="let job of jobs" value="{{job.id}}">{{job.code}}</option>
                                    
@@ -51,14 +52,16 @@
                               </div>
                               <div class="col">
                                 <div class="form-outline">
-                                  <input type="number" (change)="onChangeHour($event)" id="form6Example2" class="form-control" formControlName ="JobHours" />
                                   <label class="form-label" for="form6Example2">Hours</label>
+                                  <input type="number" (change)="onChangeHour($event)" id="form6Example2" class="form-control" formControlName ="JobHours" />
+                                  
                                 </div>
                               </div>
                               <div class="col">
                                   <div class="form-outline">
+                                    <label class="form-label" for="form6Example2">Total Amount</label>
                                     <input type="number" id="form6Example2" class="form-control" [value] = "selectedJobTotal" formControlName ="JobTotal" />
-                                    <label class="form-label" for="form6Example2">{{selectedJobTotal}}</label>
+                                    
 
                                   </div>
                                 </div>
@@ -80,22 +83,25 @@
                         <div class="row mb-4">
                           <div class="col">
                             <div class="form-outline">
+                              <label class="form-label" for="form6Example2">Machine Code</label>
                               <select class="form-select" (change) ="onChangeRateM($event)" aria-label="Default select example" formControlName ="MachineCode" >
-                                <option *ngFor="let machine of machines" value="{{machine}}">{{machine.code}}</option>
+                                <option *ngFor="let machine of machines" value="{{machine.id}}">{{machine.code}}</option>
                                
                               </select>
                             </div>
                           </div>
                           <div class="col">
                             <div class="form-outline">
-                              <input type="text" (change) ="onChangeHourM($event)" id="form6Example2" class="form-control" formControlName ="MachineHours" />
                               <label class="form-label" for="form6Example2">Total Hours</label>
+                              <input type="text" (change) ="onChangeHourM($event)" id="form6Example2" class="form-control" formControlName ="MachineHours" />
+                              
                             </div>
                           </div>
                           <div class="col">
                               <div class="form-outline">
-                                <input type="number" id="form6Example2" class="form-control"  value = "{{selectedMachineTotal}}" formControlName ="MachineTotal"/>
-                                <label class="form-label" for="form6Example2">{{selectedMachineTotal}}</label>
+                                <label class="form-label" for="form6Example2">Total Amount</label>
+                                <input type="number" id="form6Example2" class="form-control"  value = "{{selectedMachineTotal}}" formControlName ="MachineTotal">
+                                
 
                               </div>
                             </div>

@@ -12,4 +12,8 @@ export class machine {
     get _code() {
         return this.code;
     }
+
+    get _rent() {
+        return this.rent;
+    }
 }

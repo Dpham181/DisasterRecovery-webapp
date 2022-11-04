@@ -25,6 +25,10 @@ export class job {
     return this.rate;
    }
 
+   get _description(){
+    return this.description;
+   }
+
 
   
 }

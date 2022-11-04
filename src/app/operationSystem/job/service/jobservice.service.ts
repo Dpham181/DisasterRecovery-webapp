@@ -37,6 +37,7 @@ export class JobserviceService {
 
   getJobById(id: number): Observable<job>{
     console.log("Iam Api" + id)
+    console.log(this.API_URL + '/' + id)
     return this.httpClient.get<job>(this.API_URL+ '/' + id,  {headers: this.headers})
     .pipe(catchError(new Api().handleError));
   }

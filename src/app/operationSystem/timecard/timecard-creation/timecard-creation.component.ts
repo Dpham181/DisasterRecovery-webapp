@@ -49,6 +49,7 @@ export class TimecardCreationComponent implements OnInit {
       complete: () => console.info('complete') 
     }
     )
+    
     this.timecardForm = this.fb.group(
       
     { 
@@ -78,9 +79,8 @@ export class TimecardCreationComponent implements OnInit {
      this.selectedjobcode =  newValue.target.value;
      console.log(Number(this.selectedjobcode));
      this.jobSer.getJobById(Number(this.selectedjobcode)).subscribe({
-      next: (v) => {
-        
-        console.log(Number(v._rate)) // cannnot get out the job rate for calculation
+      next: (v:any) => {
+        console.log(v.rate), this.selectedjobrate = v.rate; // cannnot get out the job rate for calculation
        },
       error: (e) => console.error(),
       complete: () => console.info('complete') }
@@ -92,7 +92,15 @@ export class TimecardCreationComponent implements OnInit {
   }
 
   onChangeRateM(newValue:any) {
-    this.selectedMachinerate = newValue.target.value;
+    this.selectedmachinecode = newValue.target.value;
+    console.log(Number(this.selectedmachinecode));
+     this.machineSer.getMachineById(Number(this.selectedmachinecode)).subscribe({
+      next: (v:any) => {
+        console.log(v.rent), this.selectedMachinerate = v.rent; 
+       },
+      error: (e) => console.error(),
+      complete: () => console.info('complete') }
+    );
     
   }
   onChangeHourM(newValue:any) {
@@ -167,10 +175,11 @@ export class TimecardCreationComponent implements OnInit {
      let Timecard = new timecard();
      Timecard._code = this.timecardForm.value.code;
      Timecard._contractor= this.timecardForm.value.contractor;
-     Timecard._hours = 0;   // need to cal under -> line 77 -> 97 
-     Timecard._amount =0;  // need to cal   -> line 77 -> 97 
+     Timecard._hours = Number(this.selectedjobHours) + Number(this.selectedMachineHours);   // need to cal under -> line 77 -> 97 
+     Timecard._amount = this.selectedJobTotal + this.selectedMachineTotal;  // need to cal   -> line 77 -> 97 
      Timecard._timecardJob=jobs;
      Timecard._timecardMachine= machines;
+     Timecard._status = "Open";
      console.log(jobs)
 
      console.log(Timecard)
@@ -178,13 +187,13 @@ export class TimecardCreationComponent implements OnInit {
       (error) => console.log(error)
     )
  
-  /*
+  
     this.router.navigate(['/access/Timecardsubmisstion']).then(() => {
       this.timecardForm.reset();
 
       window.location.reload();
     });;
-    */
+    
 
   }
   reset(){
