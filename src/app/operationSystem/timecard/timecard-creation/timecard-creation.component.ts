@@ -1,9 +1,11 @@
-import { job } from './../../../../model/job';
-import { MachineserviceService } from './../../machine/service/machineservice.service';
 import { machine } from 'src/model/machine';
+import { MachineserviceService } from './../../machine/service/machineservice.service';
+
 import { JobserviceService } from './../../job/service/jobservice.service';
 import { TimecardserviceService } from './../service/timecardservice.service';
 import { timecard } from 'src/model/timecard';
+import { job } from 'src/model/job';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
@@ -19,7 +21,17 @@ export class TimecardCreationComponent implements OnInit {
   timecards: any;
   jobs:any;
   machines:any;
+  selectedjobFinal:job[] = [];
+  selectedmachineFinal:machine[] = [];
+  selectedjobcode!:string;
+  selectedjobrate!:number;
+  selectedjobHours:number = 1;
+  selectedJobTotal!:number;
+  selectedmachinecode!:string;
 
+  selectedMachinerate!:number;
+  selectedMachineHours:number = 1;
+  selectedMachineTotal!:number;
   constructor(private timecardS: TimecardserviceService,private jobSer:JobserviceService ,private machineSer:MachineserviceService ,  private fb:FormBuilder, private router:Router) {}
 
   ngOnInit(): void {
@@ -61,16 +73,33 @@ export class TimecardCreationComponent implements OnInit {
 
 
   }
-  /*
-  onChange(event:any) {
-      this.jobcodeChossenrate = event.target.value;
-      console.log(this.jobcodeChossenrate)
-      console.log(this.jobworkedhour)
-
-      this.totaljobworked = Number(this.jobcodeChossenrate) * this.jobworkedhour;
-
+  
+  onChangeRate(newValue:any) {  // eroor herer  
+     this.selectedjobcode =  newValue.target.value;
+     console.log(Number(this.selectedjobcode));
+     this.jobSer.getJobById(Number(this.selectedjobcode)).subscribe({
+      next: (v) => {
+        
+        console.log(Number(v._rate)) // cannnot get out the job rate for calculation
+       },
+      error: (e) => console.error(),
+      complete: () => console.info('complete') }
+    );
   }
-  */
+  onChangeHour(newValue:any) {
+    this.selectedjobHours =  newValue.target.value;
+    this.selectedJobTotal= this.selectedjobrate*this.selectedjobHours
+  }
+
+  onChangeRateM(newValue:any) {
+    this.selectedMachinerate = newValue.target.value;
+    
+  }
+  onChangeHourM(newValue:any) {
+    this.selectedMachineHours =  newValue.target.value;
+    this.selectedMachineTotal= this.selectedMachinerate*this.selectedMachineHours
+  }
+  
   get jobsForm() {
     return this.timecardForm.controls["jobsForm"] as FormArray;
   }
@@ -99,14 +128,69 @@ export class TimecardCreationComponent implements OnInit {
     });
     this.MachinesForm.push(MachineForm);
   }
-  onSubmit(timecardForm:any)
+  onSubmit(_timecardForm:any)
   {
+
+    let jobs:job[] = [];
+    let machines:machine[]=[];
     console.log(this.timecardForm.value);
-    var item = (<FormArray>this.timecardForm.get('jobsForm')).at(0);
-    console.log(item);
+    let  jobformsize= (<FormArray>this.timecardForm.get('jobsForm')).length;
+    let  Machinesformsize = (<FormArray>this.timecardForm.get('MachinesForm')).length;
+    let i = 0 ; 
+
+    
+     while(i <jobformsize ){
+      this.jobSer.getJobById((<FormArray>this.timecardForm.get('jobsForm')).at(i).value.JobCode).subscribe({
+
+        next: (v) => {
+             jobs.push(v);
+        },
+        error: (e) => console.error(e),
+        complete: () => console.info('complete') }
+      );
+      
+      i++
+     }
+   let  k = 0;
+     while(k <Machinesformsize ){
+      this.machineSer.getMachineById((<FormArray>this.timecardForm.get('MachinesForm')).at(k).value.MachineCode).subscribe({
+
+        next: (m) => {
+             machines.push(m);
+        },
+        error: (e) => console.error(e),
+        complete: () => console.info('complete') }
+      );
+      
+      k++
+     }
+     let Timecard = new timecard();
+     Timecard._code = this.timecardForm.value.code;
+     Timecard._contractor= this.timecardForm.value.contractor;
+     Timecard._hours = 0;   // need to cal under -> line 77 -> 97 
+     Timecard._amount =0;  // need to cal   -> line 77 -> 97 
+     Timecard._timecardJob=jobs;
+     Timecard._timecardMachine= machines;
+     console.log(jobs)
+
+     console.log(Timecard)
+    this.timecardS.addTimecard(Timecard).subscribe(
+      (error) => console.log(error)
+    )
+ 
+  /*
+    this.router.navigate(['/access/Timecardsubmisstion']).then(() => {
+      this.timecardForm.reset();
+
+      window.location.reload();
+    });;
+    */
 
   }
- 
+  reset(){
+    this.timecardForm.reset();
+
+  }
   get JobCode()
   {
     return this.timecardForm.get('JobCode');

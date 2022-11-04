@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           window.location.reload();
         });
         if(v.role == "User")
-        this.router.navigate(['/access']).then(() => {
+        this.router.navigate(['/access/Timecardsubmisstion/new']).then(() => {
           window.location.reload();
         });
 

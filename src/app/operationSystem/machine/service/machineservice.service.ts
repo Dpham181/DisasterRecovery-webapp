@@ -32,8 +32,8 @@ export class MachineserviceService {
     .pipe(catchError(new Api().handleError));
   }
 
-  getMachineById(id: number): Observable<machine[]>{
-    return this.httpClient.get<machine[]>(this.API_URL+ '/' + id,  {headers: this.headers})
+  getMachineById(id: number): Observable<machine>{
+    return this.httpClient.get<machine>(this.API_URL+ '/' + id,  {headers: this.headers})
     .pipe(catchError(new Api().handleError));
   }
 

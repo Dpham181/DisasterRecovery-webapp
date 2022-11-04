@@ -8,4 +8,8 @@ export class machine {
     get _hours() {
         return this.hours;
     }
+
+    get _code() {
+        return this.code;
+    }
 }

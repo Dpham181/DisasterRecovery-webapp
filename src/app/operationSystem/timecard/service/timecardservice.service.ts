@@ -25,15 +25,15 @@ export class TimecardserviceService {
     .pipe(catchError(new Api().handleError));
   }
 
-  getTimecardById(id: number): Observable<timecard[]>{
-    return this.httpClient.get<timecard[]>(this.API_URL+ '/' + id,  {headers: this.headers})
+  getTimecardById(id: number): Observable<timecard>{
+    return this.httpClient.get<timecard>(this.API_URL+ '/' + id,  {headers: this.headers})
     .pipe(catchError(new Api().handleError));
   }
 
-  addTimecard(timecardData: any): Observable<timecard[]>{
+  addTimecard(timecardData: any): Observable<timecard>{
   
     console.log(timecardData);
-    return this.httpClient.post<timecard[]>(this.API_URL, timecardData, {headers: this.headers})
+    return this.httpClient.post<timecard>(this.API_URL, timecardData, {headers: this.headers})
     .pipe(catchError(new Api().handleError));
   }
 

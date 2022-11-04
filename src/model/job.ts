@@ -7,7 +7,7 @@ export class job {
     "code": "Plumber",
     "rate": 65.0
     */
-   constructor(private id?:number, private hours?:number, private description?:string, private code?:string, private rate?:string) {}
+   constructor(private id?:number, private hours?:number, private description?:string, private code?:string, private rate?:number) {}
    
    get _id(){
     return this.id;
