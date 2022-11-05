@@ -56,12 +56,7 @@ export class TimecardCreationComponent implements OnInit {
       code: ['', Validators.required],
       contractor: ['', Validators.required],
       date: ['', Validators.required],
-      jobsForm: this.fb.array([this.fb.group({
-        JobCode: ['', Validators.required],
-        JobHours: ['', Validators.required],
-        JobTotal: ['', Validators.required]
-  
-      })]),
+      jobsForm: this.fb.array([]),
     
       MachinesForm: this.fb.array([this.fb.group({
         MachineCode: ['', Validators.required],
@@ -75,20 +70,20 @@ export class TimecardCreationComponent implements OnInit {
 
   }
   
-  onChangeRate(newValue:any) {  // eroor herer  
-     this.selectedjobcode =  newValue.target.value;
-     console.log(Number(this.selectedjobcode));
-     this.jobSer.getJobById(Number(this.selectedjobcode)).subscribe({
-      next: (v:any) => {
-        console.log(v.rate), this.selectedjobrate = v.rate; // cannnot get out the job rate for calculation
-       },
-      error: (e) => console.error(),
-      complete: () => console.info('complete') }
-    );
+  onChangeRate(id:any) {  // eroor herer  still error too many cal at the time
+    let jobdataform = (<FormArray>this.timecardForm.get('jobsForm')).at(id);
+    jobdataform.valueChanges.subscribe(value => {
+            jobdataform.patchValue({
+
+        "JobTotal": value.JobHours * value.JobCode,
+      })
+    
+    })
+   
+    
   }
-  onChangeHour(newValue:any) {
-    this.selectedjobHours =  newValue.target.value;
-    this.selectedJobTotal= this.selectedjobrate*this.selectedjobHours
+  onChangeHour(id:any) {
+   
   }
 
   onChangeRateM(newValue:any) {
@@ -115,7 +110,7 @@ export class TimecardCreationComponent implements OnInit {
   addJobs() {
     const jobForm = this.fb.group({
       JobCode: ['', Validators.required],
-      JobHours: ['', Validators.required],
+      JobHours: ['1', Validators.required],
       JobTotal: ['', Validators.required]
 
     });
@@ -138,7 +133,7 @@ export class TimecardCreationComponent implements OnInit {
   }
   onSubmit(_timecardForm:any)
   {
-
+    /*
     let jobs:job[] = [];
     let machines:machine[]=[];
     console.log(this.timecardForm.value);
@@ -186,7 +181,7 @@ export class TimecardCreationComponent implements OnInit {
     this.timecardS.addTimecard(Timecard).subscribe(
       (error) => console.log(error)
     )
- 
+      */
   
     this.router.navigate(['/access/Timecardsubmisstion']);
 

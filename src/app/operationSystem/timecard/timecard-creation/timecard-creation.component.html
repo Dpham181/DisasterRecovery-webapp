@@ -48,9 +48,10 @@
                               <div class="col">
                                 <div class="form-outline">
                                   <label class="form-label" for="form6Example2">Job Code</label>
-                                  <select   (change)="onChangeRate($event)"   class="form-select" aria-label="Default select example" formControlName ="JobCode" >
-                                    <option *ngFor="let job of jobs" value="{{job.id}}">{{job.code}}</option>
-                                   
+                                  <select   (change)="onChangeRate(i)"   class="form-select" aria-label="Default select example" formControlName ="JobCode" >
+                                    <option *ngFor="let job of jobs" value="{{job.rate}}">{{job.code}}
+                                    </option>
+
                                   </select>
                                 </div>
                               </div>
@@ -64,7 +65,7 @@
                               <div class="col">
                                   <div class="form-outline">
                                     <label class="form-label" for="form6Example2">Total Amount</label>
-                                    <input type="number" id="form6Example2" class="form-control" [value] = "selectedJobTotal" formControlName ="JobTotal" />
+                                    <input type="number" id="form6Example2" class="form-control"  formControlName ="JobTotal" />
                                     
 
                                   </div>
@@ -72,9 +73,9 @@
                           </div>
                         </div>
 
-                        <button  (click)="addJobs()">add</button>
 
                           </ng-container>
+                        <button  (click)="addJobs()">add</button>
 
                 </ng-container>
                   </div>
