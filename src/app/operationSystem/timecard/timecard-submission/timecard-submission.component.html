@@ -1,0 +1,42 @@
+
+<table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <th>ID</th>
+        <th>Site Code</th>
+        <th>Contractor Name</th>
+        <th>Total Hours</th>
+        <th>Total Amount</th>
+        <th>Status</th>
+        <th>
+          <button routerLink="new" data-mdb-toggle="modal" data-mdb-target="#TimecardModal" class="btn btn-sm btn-outline-primary btn-rounded" type="button" class="btn btn-primary btn-rounded">New TimeCard</button>
+        </th>
+
+       
+      </tr>
+    </thead>
+    <tbody >
+      <tr appClickActive *ngFor="let tc of timecards">
+        <td>
+          <div class="d-flex align-items-center">
+          
+            <div class="ms-3">
+              <p class="fw-bold mb-1">{{tc.id}}</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{tc.code}}</p>
+        </td>
+        <td>
+          <span class="badge badge-success rounded-pill d-inline">{{tc.contractor}}</span>
+        </td>
+        <td>{{tc.hours | hour }}</td>
+        <td>{{tc.amount | money  }}</td>
+        <td>{{tc.status}}</td>
+      
+      </tr>
+      
+    </tbody>
+  </table>
+   <app-timecard-creation> </app-timecard-creation>

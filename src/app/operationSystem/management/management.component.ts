@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagementComponent implements OnInit {
 
+  public role:any;
+   public email:any;
   constructor() { }
 
   ngOnInit(): void {
+    this.role = localStorage.getItem("role");
+    this.email = localStorage.getItem("email");
+
   }
 
 }

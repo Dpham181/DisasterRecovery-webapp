@@ -1,13 +1,13 @@
 export class user {
-    constructor(private _email?:string , private _password?:string ){}
+    constructor(private email?:string , private password?:string ){}
 
-    get email() {
-        return this._email;
+    get _email() {
+        return this.email;
     }
 
 
-    get password(){
-        return this._password;
+    get _password(){
+        return this.password;
     }
 
 }

@@ -1,0 +1,142 @@
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="TimecardModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">TIMECARD FORM</h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"><div class="card ">
+            <div class="card-body">
+           
+              <div>
+
+                <form [formGroup]="timecardForm" (ngSubmit)="onSubmit(timecardForm)">
+                    <div class="row mb-4">
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="text" id="form6Example1" class="form-control" formControlName ="code"/>
+                            <label class="form-label" for="form6Example1" >Side Code</label>
+                          </div>
+
+                        </div>
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="text" id="form6Example2" class="form-control" formControlName ="contractor" />
+                            <label class="form-label" for="form6Example2">Contractor Name</label>
+                          </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                              <input type="date" id="form6Example2" class="form-control" formControlName ="date"/>
+                            </div>
+                          </div>
+                    </div>
+                    <div>
+                    <div  id="jobform" class="form-outline"> 
+                      <label class="form-label" for="form6Example2"><h3>Labor Entry</h3></label>
+
+                     <div class="form-control">
+                      <ng-container formArrayName="jobsForm" >
+                        <ng-container *ngFor="let jobForm of jobsForm.controls; let i = index">
+                          <div formGroupName="{{i}}">
+                            
+                            <div class="row mb-4">
+                              <div class="col">
+                                <div class="form-outline">
+                                  <label class="form-label" for="form6Example2">Job Code</label>
+                                  <select   (change)="onChangeRate(i)"   class="form-select" aria-label="Default select example" formControlName ="JobCode" >
+                                    <option *ngFor="let job of jobs" value="{{job.rate}}">{{job.code}}
+                                    </option>
+
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-outline">
+                                  <label class="form-label" for="form6Example2">Hours</label>
+                                  <input type="number" (change)="onChangeHour($event)"  id="form6Example2" class="form-control" formControlName ="JobHours" />
+                                  
+                                </div>
+                              </div>
+                              <div class="col">
+                                  <div class="form-outline">
+                                    <label class="form-label" for="form6Example2">Total Amount</label>
+                                    <input type="number" id="form6Example2" class="form-control"  formControlName ="JobTotal" />
+                                    
+
+                                  </div>
+                                </div>
+                          </div>
+                        </div>
+
+
+                          </ng-container>
+                        <button  (click)="addJobs()">add</button>
+
+                </ng-container>
+                  </div>
+                    
+
+                    </div>
+                 
+                    
+                </div>
+                <div>
+                <div> <h3> Machines </h3> </div>
+                <ng-container formArrayName="MachinesForm">
+                    <ng-container *ngFor="let MachineForm of MachinesForm.controls; let i = index">
+                      <div formGroupName="{{i}}">
+                        <div class="row mb-4">
+                          <div class="col">
+                            <div class="form-outline">
+                              <label class="form-label" for="form6Example2">Machine Code</label>
+                              <select class="form-select" (change) ="onChangeRateM($event)" aria-label="Default select example" formControlName ="MachineCode" >
+                                <option *ngFor="let machine of machines" value="{{machine.id}}">{{machine.code}}</option>
+                               
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-outline">
+                              <label class="form-label" for="form6Example2">Total Hours</label>
+                              <input type="text" (change) ="onChangeHourM($event)" id="form6Example2" class="form-control" formControlName ="MachineHours" />
+                              
+                            </div>
+                          </div>
+                          <div class="col">
+                              <div class="form-outline">
+                                <label class="form-label" for="form6Example2">Total Amount</label>
+                                <input type="number" id="form6Example2" class="form-control"  value = "{{selectedMachineTotal}}" formControlName ="MachineTotal">
+                                
+
+                              </div>
+                            </div>
+                      </div>
+                    </div>
+
+
+                      </ng-container>
+
+            </ng-container>
+                
+            <button  (click)="addMachines()">add</button>
+            </div>
+
+                
+                      <!-- Submit button -->
+                      <button type="submit" class="btn btn-primary btn-block mb-4">Submmit</button>
+                      <button (click)="reset()" class="btn btn-primary btn-block mb-4">Clear</button>
+
+                  </form>
+                  </div>
+           
+        </div>
+        </div></div>
+      
+      </div>
+    </div>
+  </div>

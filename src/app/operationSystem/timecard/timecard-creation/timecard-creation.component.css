@@ -1,0 +1,7 @@
+.modal-content{
+    width: max-content;
+    flex-direction: none;
+}
+#jobform{
+    border: 5px;
+}
