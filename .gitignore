@@ -1,0 +1,8 @@
+
+*.pack
+*.old
+*.json
+*.cmd
+*.ps1
+node_modules/
+
