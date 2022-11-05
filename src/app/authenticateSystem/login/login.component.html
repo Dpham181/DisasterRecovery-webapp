@@ -18,7 +18,7 @@
                     <!-- Email input -->
                     <div class="form-outline mb-4" >
                       <label class="form-label" for="form1Example1">Email address</label>
-                      <input type="email" id="form1Example1"  class="form-control" formControlName = "email"  [class.is-invalid]="email.invalid && email.touched" />
+                      <input type="email" id="form1Example1" class="form-control" formControlName = "email"  [class.is-invalid]="email.invalid && email.touched" />
                       
                       <div *ngIf="email.errors && email.touched">
                         <div class="alert alert-danger" *ngIf="email.errors?.required">Please input email</div>
@@ -50,3 +50,5 @@
       </div>
     </div>
   </div>
+
+ 

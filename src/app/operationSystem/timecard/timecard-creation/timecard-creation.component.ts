@@ -3,12 +3,12 @@ import { MachineserviceService } from './../../machine/service/machineservice.se
 
 import { JobserviceService } from './../../job/service/jobservice.service';
 import { TimecardserviceService } from './../service/timecardservice.service';
-import { timecard } from 'src/model/timecard';
-import { job } from 'src/model/job';
 
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { timecard } from 'src/model/timecard';
+import { job } from 'src/model/job';
 
 @Component({
   selector: 'app-timecard-creation',
@@ -21,20 +21,12 @@ export class TimecardCreationComponent implements OnInit {
   timecards: any;
   jobs:any;
   machines:any;
-  selectedjobFinal:job[] = [];
-  selectedmachineFinal:machine[] = [];
-  selectedjobcode!:string;
-  selectedjobrate!:number;
-  selectedjobHours:number = 1;
-  selectedJobTotal!:number;
-  selectedmachinecode!:string;
-
-  selectedMachinerate!:number;
-  selectedMachineHours:number = 1;
-  selectedMachineTotal!:number;
+  
   constructor(private timecardS: TimecardserviceService,private jobSer:JobserviceService ,private machineSer:MachineserviceService ,  private fb:FormBuilder, private router:Router) {}
 
   ngOnInit(): void {
+
+    // rest api call for list of jobs
     this.jobSer.ListOfJobs.subscribe({
       next: (v) => {this.jobs=v; console.log(v)},
       error: (e) => console.error(e),
@@ -42,14 +34,14 @@ export class TimecardCreationComponent implements OnInit {
     );
 
 
-   
+   // rest api call for list of machines 
     this.machineSer.ListOfMachines.subscribe({
       next: (m) => {this.machines = m; console.log(m)},
       error: (e) => console.error(e),
       complete: () => console.info('complete') 
     }
     )
-    
+    // create the time card form with inclcuing 3 fields and a list of job  and machine forms 
     this.timecardForm = this.fb.group(
       
     { 
@@ -58,133 +50,125 @@ export class TimecardCreationComponent implements OnInit {
       date: ['', Validators.required],
       jobsForm: this.fb.array([]),
     
-      MachinesForm: this.fb.array([this.fb.group({
-        MachineCode: ['', Validators.required],
-        MachineHours: ['', Validators.required],
-        MachineTotal: ['', Validators.required]
-  
-      })])
+      MachinesForm: this.fb.array([])
     },)
      
-
+   this.addJobs();
+   this.addMachines();
+    
 
   }
-  
-  onChangeRate(id:any) {  // eroor herer  still error too many cal at the time
+  // on change in job form (emitEvent for stopping the change and getting back the result )
+  onChangeJob(id:any) { 
     let jobdataform = (<FormArray>this.timecardForm.get('jobsForm')).at(id);
-    jobdataform.valueChanges.subscribe(value => {
+   
+   jobdataform.valueChanges.subscribe(value => {
+
             jobdataform.patchValue({
 
-        "JobTotal": value.JobHours * value.JobCode,
-      })
+        "JobTotal": value.Job.rate*value.JobHours,
+      }, { emitEvent: false })
     
     })
    
     
   }
-  onChangeHour(id:any) {
-   
-  }
+ // onchange in machine form 
+  onChangeMachine(id:any) { 
+    let Machinedataform = (<FormArray>this.timecardForm.get('MachinesForm')).at(id);
+    Machinedataform.valueChanges.subscribe(value => {
 
-  onChangeRateM(newValue:any) {
-    this.selectedmachinecode = newValue.target.value;
-    console.log(Number(this.selectedmachinecode));
-     this.machineSer.getMachineById(Number(this.selectedmachinecode)).subscribe({
-      next: (v:any) => {
-        console.log(v.rent), this.selectedMachinerate = v.rent; 
-       },
-      error: (e) => console.error(),
-      complete: () => console.info('complete') }
-    );
+      Machinedataform.patchValue({
+
+        "MachineTotal": value.Machine.rent * value.MachineHours,
+      }, { emitEvent: false })
+    
+    })
+   
     
   }
-  onChangeHourM(newValue:any) {
-    this.selectedMachineHours =  newValue.target.value;
-    this.selectedMachineTotal= this.selectedMachinerate*this.selectedMachineHours
-  }
-  
+  // create job form by using formgroup 
   get jobsForm() {
     return this.timecardForm.controls["jobsForm"] as FormArray;
   }
 
   addJobs() {
     const jobForm = this.fb.group({
-      JobCode: ['', Validators.required],
+      Job: ['', Validators.required],
       JobHours: ['1', Validators.required],
-      JobTotal: ['', Validators.required]
+      JobTotal: ['0', Validators.required]
 
     });
     this.jobsForm.push(jobForm);
   }
 
-
+// create machine form by using formgroup 
   get MachinesForm() {
     return this.timecardForm.controls["MachinesForm"] as FormArray;
   }
 
   addMachines() {
     const MachineForm = this.fb.group({
-      MachineCode: ['', Validators.required],
-      MachineHours: ['', Validators.required],
-      MachineTotal: ['', Validators.required]
+      Machine: ['', Validators.required],
+      MachineHours: ['1', Validators.required],
+      MachineTotal: ['0', Validators.required]
 
     });
     this.MachinesForm.push(MachineForm);
   }
+
+
+  /// time card submission 
   onSubmit(_timecardForm:any)
   {
-    /*
-    let jobs:job[] = [];
-    let machines:machine[]=[];
-    console.log(this.timecardForm.value);
-    let  jobformsize= (<FormArray>this.timecardForm.get('jobsForm')).length;
-    let  Machinesformsize = (<FormArray>this.timecardForm.get('MachinesForm')).length;
-    let i = 0 ; 
+    let Timecard = new timecard();
+    Timecard._code = this.timecardForm.value.code;
+    Timecard._contractor= this.timecardForm.value.contractor;
 
+   
+    let  jobformvalues= (<FormArray>this.timecardForm.get('jobsForm'));
+    let jobs:job[]= []; 
+    let Totalhour = 0 ; 
+    let AmountTotal = 0; 
+    jobformvalues.controls.forEach((Data) =>
     
-     while(i <jobformsize ){
-      this.jobSer.getJobById((<FormArray>this.timecardForm.get('jobsForm')).at(i).value.JobCode).subscribe({
-
-        next: (v) => {
-             jobs.push(v);
-        },
-        error: (e) => console.error(e),
-        complete: () => console.info('complete') }
-      );
+    {
       
-      i++
-     }
-   let  k = 0;
-     while(k <Machinesformsize ){
-      this.machineSer.getMachineById((<FormArray>this.timecardForm.get('MachinesForm')).at(k).value.MachineCode).subscribe({
-
-        next: (m) => {
-             machines.push(m);
-        },
-        error: (e) => console.error(e),
-        complete: () => console.info('complete') }
-      );
+      Totalhour += Data.value.JobHours;
+      AmountTotal += Data.value.JobTotal;
+      jobs.push(Data.value.Job);
+    }
+    
+    )
+    let  Machinesformvalues = (<FormArray>this.timecardForm.get('MachinesForm'));
+    let machines:machine[]= []; 
+   
+    Machinesformvalues.controls.forEach((Data) =>
+    
+    {
       
-      k++
-     }
-     let Timecard = new timecard();
-     Timecard._code = this.timecardForm.value.code;
-     Timecard._contractor= this.timecardForm.value.contractor;
-     Timecard._hours = Number(this.selectedjobHours) + Number(this.selectedMachineHours);   // need to cal under -> line 77 -> 97 
-     Timecard._amount = this.selectedJobTotal + this.selectedMachineTotal;  // need to cal   -> line 77 -> 97 
-     Timecard._timecardJob=jobs;
-     Timecard._timecardMachine= machines;
+      Totalhour += Data.value.MachineHours;
+      AmountTotal += Data.value.MachineTotal;
+      machines.push(Data.value.Machine);
+    }
+    
+    )
+    Timecard._hours= Totalhour;
+    Timecard._amount = AmountTotal
+    Timecard._timecardJob=jobs;
+    Timecard._timecardMachine= machines;
+
      Timecard._status = "Open";
-     console.log(jobs)
 
      console.log(Timecard)
+     /*
     this.timecardS.addTimecard(Timecard).subscribe(
       (error) => console.log(error)
     )
       */
   
-    this.router.navigate(['/access/Timecardsubmisstion']);
-
+   // this.router.navigate(['/access/Timecardsubmisstion']);
+      
   }
   reset(){
     this.timecardForm.reset();
