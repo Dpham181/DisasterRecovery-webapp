@@ -19,15 +19,16 @@ export class TimecardCreationComponent implements OnInit {
 
   public timecardForm: any;
   timecards: any;
-  jobs:any;
-  machines:any;
+  jobs:job[]=[];
+  defaultjob:any;
+  machines:machine[]=[];
   
   constructor(private timecardS: TimecardserviceService,private jobSer:JobserviceService ,private machineSer:MachineserviceService ,  private fb:FormBuilder, private router:Router) {}
 
   ngOnInit(): void {
 
     // rest api call for list of jobs
-    this.jobSer.ListOfJobs.subscribe({
+   this.jobSer.ListOfJobs.subscribe({
       next: (v) => {this.jobs=v; console.log(v)},
       error: (e) => console.error(e),
       complete: () => console.info('complete') }
@@ -52,24 +53,37 @@ export class TimecardCreationComponent implements OnInit {
     
       MachinesForm: this.fb.array([])
     },)
-     
-   this.addJobs();
-   this.addMachines();
+
+    
+    let items = [...Array(3).keys()].forEach(()=>{this.addJobs();
+      this.addMachines();
+       })
+
     
 
   }
   // on change in job form (emitEvent for stopping the change and getting back the result )
   onChangeJob(id:any) { 
     let jobdataform = (<FormArray>this.timecardForm.get('jobsForm')).at(id);
-   
+    // prevent selected duplicate job 
+    (<FormArray>this.timecardForm.get('jobsForm')).valueChanges.subscribe((valueofForm) =>
+      {
+        console.log(valueofForm);
+     
+
+      }
+
+    )
+    console.log("here");
    jobdataform.valueChanges.subscribe(value => {
 
-            jobdataform.patchValue({
-
-        "JobTotal": value.Job.rate*value.JobHours,
-      }, { emitEvent: false })
+   
+      jobdataform.patchValue({ "JobTotal": value.Job.rate*value.JobHours, }, { emitEvent: false })
+     
+   })
+   
     
-    })
+ 
    
     
   }
@@ -93,8 +107,9 @@ export class TimecardCreationComponent implements OnInit {
   }
 
   addJobs() {
+    
     const jobForm = this.fb.group({
-      Job: ['', Validators.required],
+      Job: [null, Validators.required],
       JobHours: ['1', Validators.required],
       JobTotal: ['0', Validators.required]
 
@@ -169,11 +184,14 @@ export class TimecardCreationComponent implements OnInit {
      Timecard._status = "Open";
 
      console.log(Timecard)
-     /*
+     
     this.timecardS.addTimecard(Timecard).subscribe(
+       (next) => this.router.navigate(['/access/Timecardsubmisstion']).then(() => {
+        window.location.reload();
+      }),
       (error) => console.log(error)
     )
-      */
+      
   
    // this.router.navigate(['/access/Timecardsubmisstion']);
       

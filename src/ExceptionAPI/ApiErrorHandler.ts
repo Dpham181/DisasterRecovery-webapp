@@ -7,14 +7,32 @@ export class Api{
 
 
 handleError(error: HttpErrorResponse) {
+
+  // internal console log error
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
     } else {
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
+        if(error.status == 409){
+          alert("The record already exits!!")
+        }
+        if(error.status == 500){
+          alert("Server down")
+        }
+        if(error.status == 400){
+          alert("Requrie to fill up all in input")
+        }
+        if(error.status == 404){
+          alert("Not Found")
+        }
     }
     return throwError(
       'Something bad happened; please try again later.');
   };
+
+  // alert error 
+ 
+  
 }

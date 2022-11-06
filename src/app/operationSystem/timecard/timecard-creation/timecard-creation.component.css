@@ -1,6 +1,6 @@
 .modal-content{
-    width: fit-content;
-    flex-direction: none;
+    width: max-content;
+    flex-direction: row;
 }
 
 .textoverlay{
@@ -27,4 +27,7 @@
 .input{
     margin-top: 0
     ;
+}
+.numbersize{
+    size: 1;
 }

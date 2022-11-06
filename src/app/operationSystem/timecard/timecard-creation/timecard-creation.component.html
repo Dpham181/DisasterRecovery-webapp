@@ -40,7 +40,7 @@
                     <div>
                
                      <div class="form-control">
-                      <div class="form-label textoverlay">Labor Entry</div>
+                      <div class="form-label textoverlay"><h5>Labor Entry</h5></div>
                       <div class="padingtopdiv" >
                       <ng-container formArrayName="jobsForm" >
                         <ng-container *ngFor="let jobForm of jobsForm.controls; let i = index">
@@ -50,12 +50,12 @@
                               <div class="col">
                                 <div class="form-outline">
                                   <label class="form-label" for="form6Example2">Job Code</label>
-                                  <select class="form-select"  (blur)="onChangeJob(i)"    formControlName ="Job" >
-                                    <option *ngFor="let job of jobs" [ngValue]="job">{{job.code}}
+                                  <select class="form-select"  (change)="onChangeJob(i)"   formControlName ="Job" >
+                                        <option [ngValue]="null" disabled>Select Job </option>
 
-                                    </option>
-
+                                    <option   *ngFor="let job of jobs" [ngValue]="job" placeholder="Choose One">{{job.code}}</option>
                                   </select>
+                                
                                 </div>
                               </div>
                               <div class="col">
@@ -100,33 +100,35 @@
                 <div>
 
                    <div class="form-control" >
-                    <div class="form-label textoverlay">Machine Entry</div>
+                    <div class="form-label textoverlay"><h5>Machine Entry</h5></div>
                       <div class="padingtopdiv" >
                 <ng-container id="formContrainer"formArrayName="MachinesForm">
 
                     <ng-container *ngFor="let MachineForm of MachinesForm.controls; let i = index">
                       <div formGroupName="{{i}}">
-                        <div class="row mb-4">
-                          <div class="col">
+                        <div class="row mb-4 ">
+                          <div class="col p-2 flex-grow-1  ">
                             <div class="form-outline">
                               <label class="form-label" for="form6Example2">Machine Code</label>
-                              <select class="form-select" (blur) ="onChangeMachine(i)" aria-label="Default select example" formControlName ="Machine" >
+                              <select  class="form-select" (blur) ="onChangeMachine(i)" aria-label="Default select example" formControlName ="Machine" >
+                                <option [ngValue]="null" disabled>Select Machine </option>
+
                                 <option *ngFor="let machine of machines" [ngValue]="machine">{{machine.code}}</option>
-                               
+
                               </select>
                             </div>
                           </div>
-                          <div class="col">
+                          <div class="col  ">
                             <div class="form-outline">
                               <label class="form-label" for="form6Example2">Total Hours</label>
-                              <input type="number"  id="form6Example2" class="form-control" formControlName ="MachineHours" />
+                              <input type="number"  id="typeNumber" class="form-control" formControlName ="MachineHours" />
                               
                             </div>
                           </div>
-                          <div class="col">
+                          <div class="col ">
                               <div class="form-outline">
                                 <label class="form-label" for="form6Example2">Total Amount</label>
-                                <input type="number" id="form6Example2" class="form-control"   formControlName ="MachineTotal">
+                                <input type="number"  id="typeNumber" class="form-control "   formControlName ="MachineTotal">
                                 
 
                               </div>
