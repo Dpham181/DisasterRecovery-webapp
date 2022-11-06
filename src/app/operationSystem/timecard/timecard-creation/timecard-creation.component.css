@@ -1,7 +1,30 @@
 .modal-content{
-    width: max-content;
+    width: fit-content;
     flex-direction: none;
 }
-#jobform{
-    border: 5px;
+
+.textoverlay{
+    position: absolute;
+    margin-top: -18px;
+    margin-left: 10px;
+    background: whitesmoke;
+}
+
+.padingtopdiv{
+    margin-top: 20px;
+}
+.form-control{
+    margin-top: 15px;
+
+    border: 0.2px;
+    border-style: solid;
+}
+.buttonoverlay{
+    position: absolute;
+    margin-top: -15px;
+    margin-left: 70%;
+}
+.input{
+    margin-top: 0
+    ;
 }

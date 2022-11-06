@@ -101,7 +101,11 @@ export class TimecardCreationComponent implements OnInit {
     });
     this.jobsForm.push(jobForm);
   }
-
+  delJobs() {
+    let size = this.jobsForm.length; 
+    if(size > 1)
+    this.jobsForm.removeAt(size-1);
+  }
 // create machine form by using formgroup 
   get MachinesForm() {
     return this.timecardForm.controls["MachinesForm"] as FormArray;
@@ -116,7 +120,11 @@ export class TimecardCreationComponent implements OnInit {
     });
     this.MachinesForm.push(MachineForm);
   }
-
+  delMachines() {
+    let size = this.MachinesForm.length; 
+    if(size > 1)
+    this.MachinesForm.removeAt(size-1);
+  }
 
   /// time card submission 
   onSubmit(_timecardForm:any)
