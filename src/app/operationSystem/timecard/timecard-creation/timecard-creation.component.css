@@ -1,6 +1,6 @@
 .modal-content{
     width: max-content;
-    flex-direction: row;
+    flex-direction: inline-block;
 }
 
 .textoverlay{
@@ -14,7 +14,6 @@
     margin-top: 20px;
 }
 .form-control{
-    margin-top: 15px;
 
     border: 0.2px;
     border-style: solid;
@@ -30,4 +29,13 @@
 }
 .numbersize{
     size: 1;
+}
+.card-body{
+    flex-direction:column;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+.spacetop{
+    margin-top: 40px;
 }

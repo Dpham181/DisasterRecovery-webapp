@@ -46,9 +46,9 @@ export class TimecardCreationComponent implements OnInit {
     this.timecardForm = this.fb.group(
       
     { 
-      code: ['', Validators.required],
-      contractor: ['', Validators.required],
-      date: ['', Validators.required],
+      code: ['Side Code', Validators.required],
+      contractor: ['Contractor Name', Validators.required],
+      date: ['Date', Validators.required],
       jobsForm: this.fb.array([]),
     
       MachinesForm: this.fb.array([])
@@ -65,23 +65,15 @@ export class TimecardCreationComponent implements OnInit {
   // on change in job form (emitEvent for stopping the change and getting back the result )
   onChangeJob(id:any) { 
     let jobdataform = (<FormArray>this.timecardForm.get('jobsForm')).at(id);
-    // prevent selected duplicate job 
-    (<FormArray>this.timecardForm.get('jobsForm')).valueChanges.subscribe((valueofForm) =>
-      {
-        console.log(valueofForm);
-     
-
-      }
-
-    )
-    console.log("here");
-   jobdataform.valueChanges.subscribe(value => {
-
    
+     
+    jobdataform.valueChanges.subscribe(value => {
+
+      // remove job from select if user already selected 
       jobdataform.patchValue({ "JobTotal": value.Job.rate*value.JobHours, }, { emitEvent: false })
-     
+
    })
-   
+
     
  
    
@@ -110,8 +102,8 @@ export class TimecardCreationComponent implements OnInit {
     
     const jobForm = this.fb.group({
       Job: [null, Validators.required],
-      JobHours: ['1', Validators.required],
-      JobTotal: ['0', Validators.required]
+      JobHours: [null, Validators.required],
+      JobTotal: [null, Validators.required]
 
     });
     this.jobsForm.push(jobForm);
@@ -128,9 +120,9 @@ export class TimecardCreationComponent implements OnInit {
 
   addMachines() {
     const MachineForm = this.fb.group({
-      Machine: ['', Validators.required],
-      MachineHours: ['1', Validators.required],
-      MachineTotal: ['0', Validators.required]
+      Machine: [null, Validators.required],
+      MachineHours: [null, Validators.required],
+      MachineTotal: [null, Validators.required]
 
     });
     this.MachinesForm.push(MachineForm);
@@ -193,7 +185,6 @@ export class TimecardCreationComponent implements OnInit {
     )
       
   
-   // this.router.navigate(['/access/Timecardsubmisstion']);
       
   }
   reset(){

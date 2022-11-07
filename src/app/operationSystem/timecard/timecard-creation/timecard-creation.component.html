@@ -14,61 +14,95 @@
 
           <div class="card ">
 
-            <div class="card-body">
+            <div class="card-body d-flex">
            
 
-                    <div class="row mb-4">
+                    <div class="row">
                         <div class="col">
+
                           <div class="form-outline">
-                            <input  type="text" id="form6Example1" class="form-control" formControlName ="code"/>
-                            <label class="form-label" for="form6Example1" >Side Code</label>
+                            <input  type="text" id="form6Example1" class="form-control" formControlName ="code"  [class.is-invalid]="code.invalid && code.touched" />
+                            
+                            <i   *ngIf="code.errors?.required" class="fas fa-exclamation-circle trailing" ></i>
+
                           </div>
 
                         </div>
                         <div class="col">
                           <div class="form-outline">
-                            <input type="text" id="form6Example2" class="form-control" formControlName ="contractor" />
-                            <label class="form-label" for="form6Example2">Contractor Name</label>
+                            <input type="text" id="form6Example2" class="form-control" formControlName ="contractor" [class.is-invalid]="contractor.invalid && contractor.touched" />
+                            <i   *ngIf="contractor.errors?.required" class="fas fa-exclamation-circle trailing" ></i>
+
                           </div>
                         </div>
                         <div class="col">
                             <div class="form-outline">
-                              <input type="date" id="form6Example2" class="form-control" formControlName ="date"/>
+                              <input type="date" id="form6Example2" class="form-control" formControlName ="date" [class.is-invalid]="date.invalid && date.touched" />
+                              <i   *ngIf="date.errors?.required" class="fas fa-exclamation-circle trailing" ></i>
+
                             </div>
                           </div>
                     </div>
-                    <div>
+                    <div  class="spacetop">
                
                      <div class="form-control">
                       <div class="form-label textoverlay"><h5>Labor Entry</h5></div>
+                    
+                      
                       <div class="padingtopdiv" >
+                        <div class="row">
+
+                        <div class="col">
+                          <div class="form-outline">
+                            <label class="form-label" for="form1">Job Code</label>
+
+                         </div>
+                         </div>
+
+                         <div class="col">
+                          <div class="form-outline">
+                            <label class="form-label" for="form1">Hour Worked</label>
+
+                         </div>
+                         </div>
+                         <div class="col">
+                          <div class="form-outline">
+                            <label class="form-label" for="form1">Total Amount</label>
+
+                         </div>
+                         </div>
+
+                      </div>
                       <ng-container formArrayName="jobsForm" >
                         <ng-container *ngFor="let jobForm of jobsForm.controls; let i = index">
                           <div formGroupName="{{i}}">
                             
-                            <div class="row mb-4">
+                            <div class="row">
+                              
                               <div class="col">
+                              
+
                                 <div class="form-outline">
-                                  <label class="form-label" for="form6Example2">Job Code</label>
+                                 
                                   <select class="form-select"  (change)="onChangeJob(i)"   formControlName ="Job" >
-                                        <option [ngValue]="null" disabled>Select Job </option>
+                                        <option [ngValue]="null" >Select Job </option>
 
                                     <option   *ngFor="let job of jobs" [ngValue]="job" placeholder="Choose One">{{job.code}}</option>
                                   </select>
                                 
                                 </div>
+                                
                               </div>
                               <div class="col">
                                 <div class="form-outline">
-                                  <label class="form-label" for="form6Example2">Hours</label>
-                                  <input type="number"   id="form6Example2" class="form-control" formControlName ="JobHours" />
-                                  
+                                  <input type="number"   id="form6Example2" class="form-control"  formControlName ="JobHours" [min]="1" />
+                               
                                 </div>
                               </div>
                               <div class="col">
                                   <div class="form-outline">
-                                    <label class="form-label" for="form6Example2">Total Amount</label>
-                                    <input type="number" id="form6Example2"  class="form-control"  formControlName ="JobTotal" />
+                                    <input type="number" id="form6Example2"  class="form-control"  formControlName ="JobTotal" [min]="0" />
+                                    <i class="fas fa-dollar-sign trailing"></i>
 
                                   </div>
 
@@ -97,19 +131,42 @@
                  
                     
                 </div>
-                <div>
+                <div class="spacetop">
 
                    <div class="form-control" >
                     <div class="form-label textoverlay"><h5>Machine Entry</h5></div>
                       <div class="padingtopdiv" >
+
+                        <div class="row">
+
+                          <div class="col">
+                            <div class="form-outline">
+                              <label class="form-label" for="form1">Machine Code</label>
+  
+                           </div>
+                           </div>
+  
+                           <div class="col">
+                            <div class="form-outline">
+                              <label class="form-label" for="form1">Hour Worked</label>
+  
+                           </div>
+                           </div>
+                           <div class="col">
+                            <div class="form-outline">
+                              <label class="form-label" for="form1">Total Amount</label>
+  
+                           </div>
+                           </div>
+  
+                        </div>
                 <ng-container id="formContrainer"formArrayName="MachinesForm">
 
                     <ng-container *ngFor="let MachineForm of MachinesForm.controls; let i = index">
                       <div formGroupName="{{i}}">
-                        <div class="row mb-4 ">
-                          <div class="col p-2 flex-grow-1  ">
+                        <div class="row ">
+                          <div class="col  ">
                             <div class="form-outline">
-                              <label class="form-label" for="form6Example2">Machine Code</label>
                               <select  class="form-select" (blur) ="onChangeMachine(i)" aria-label="Default select example" formControlName ="Machine" >
                                 <option [ngValue]="null" disabled>Select Machine </option>
 
@@ -120,16 +177,15 @@
                           </div>
                           <div class="col  ">
                             <div class="form-outline">
-                              <label class="form-label" for="form6Example2">Total Hours</label>
-                              <input type="number"  id="typeNumber" class="form-control" formControlName ="MachineHours" />
+                              <input type="number"  id="typeNumber" class="form-control" formControlName ="MachineHours" [min]="1" />
                               
                             </div>
                           </div>
                           <div class="col ">
                               <div class="form-outline">
-                                <label class="form-label" for="form6Example2">Total Amount</label>
-                                <input type="number"  id="typeNumber" class="form-control "   formControlName ="MachineTotal">
-                                
+                                <i class="fas fa-dollar-sign trailing"></i>
+
+                                <input type="number"  id="typeNumber" class="form-control "   formControlName ="MachineTotal" [min]="0" >
 
                               </div>
                             </div>
@@ -160,7 +216,7 @@
         <div class="card-footer text-muted">
 
    <!-- Submit button -->
-   <button type="submit" class="btn btn-primary btn-block mb-4">Submmit</button>
+   <button type="submit" [disabled]="!timecardForm.valid" class="btn btn-primary btn-block mb-4">Submmit</button>
    <button (click)="reset()" class="btn btn-primary btn-block mb-4">Clear</button>
 
 
