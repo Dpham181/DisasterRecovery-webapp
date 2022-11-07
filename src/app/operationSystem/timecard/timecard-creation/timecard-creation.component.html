@@ -47,7 +47,7 @@
                
                      <div class="form-control">
                       <div class="form-label textoverlay"><h5>Labor Entry</h5></div>
-                    
+                       <div class="form-label textoverlayError" *ngIf="dupJobalert"><h5>Has Duplicate Jobs Entry</h5></div>
                       
                       <div class="padingtopdiv" >
                         <div class="row">
@@ -135,6 +135,8 @@
 
                    <div class="form-control" >
                     <div class="form-label textoverlay"><h5>Machine Entry</h5></div>
+                    <div class="form-label textoverlayError" *ngIf="dupMachinealert"><h5>Has Duplicate Machines Entry</h5></div>
+
                       <div class="padingtopdiv" >
 
                         <div class="row">

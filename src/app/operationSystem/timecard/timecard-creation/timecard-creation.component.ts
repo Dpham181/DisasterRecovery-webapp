@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { timecard } from 'src/model/timecard';
 import { job } from 'src/model/job';
+import { __values } from 'tslib';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-timecard-creation',
@@ -22,7 +24,10 @@ export class TimecardCreationComponent implements OnInit {
   jobs:job[]=[];
   defaultjob:any;
   machines:machine[]=[];
-  
+  duplicateJ:boolean = false;
+  dupJobalert:boolean=false;
+  duplicateM:boolean = false;
+  dupMachinealert:boolean=false;
   constructor(private timecardS: TimecardserviceService,private jobSer:JobserviceService ,private machineSer:MachineserviceService ,  private fb:FormBuilder, private router:Router) {}
 
   ngOnInit(): void {
@@ -151,7 +156,12 @@ export class TimecardCreationComponent implements OnInit {
       
       Totalhour += Data.value.JobHours;
       AmountTotal += Data.value.JobTotal;
+      if (jobs.includes(Data.value.Job)){
+          this.duplicateJ = true;
+          this.dupJobalert = true;
+      }
       jobs.push(Data.value.Job);
+    
     }
     
     )
@@ -164,6 +174,10 @@ export class TimecardCreationComponent implements OnInit {
       
       Totalhour += Data.value.MachineHours;
       AmountTotal += Data.value.MachineTotal;
+      if (machines.includes(Data.value.Machine)){
+        this.duplicateM = true;
+        this.dupMachinealert = true;
+    }
       machines.push(Data.value.Machine);
     }
     
@@ -176,21 +190,26 @@ export class TimecardCreationComponent implements OnInit {
      Timecard._status = "Open";
 
      console.log(Timecard)
-     
-    this.timecardS.addTimecard(Timecard).subscribe(
-       (next) => this.router.navigate(['/access/Timecardsubmisstion']).then(() => {
+     console.log(this.duplicateJ)
+
+     if(!this.duplicateJ && !this.duplicateM){
+    this.timecardS.addTimecard(Timecard).subscribe({
+      next: (v) =>  this.router.navigate(['/access/Timecardsubmisstion']).then(() => {
         window.location.reload();
       }),
-      (error) => console.log(error)
-    )
+      error: (e) => console.error(e),
+      complete: () => console.info('complete') 
+  })}
       
-  
-      
+     this.duplicateJ = false;
+     this.duplicateM = false;
+
   }
   reset(){
     this.timecardForm.reset();
 
   }
+
   get JobCode()
   {
     return this.timecardForm.get('JobCode');

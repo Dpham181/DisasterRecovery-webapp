@@ -1,3 +1,4 @@
+import { ViewDetailsComponent } from './operationSystem/timecard/view-details/view-details.component';
 import { TimecardViewUpdateComponent } from './operationSystem/timecard/timecard-view-update/timecard-view-update.component';
 import { LogoutComponent } from './authenticateSystem/logout/logout.component';
 import { AccessComponent } from './operationSystem/access/access.component';
@@ -32,7 +33,10 @@ const routes: Routes = [
   children:[
     {path:'Timecardsubmisstion', component:TimecardSubmissionComponent, 
   
-    children:[{path:'new', component:TimecardCreationComponent}]
+    children:[{path:'new', component:TimecardCreationComponent},
+    {path:'viewDetails/:id', component:ViewDetailsComponent}
+  
+  ]
  
   
   },

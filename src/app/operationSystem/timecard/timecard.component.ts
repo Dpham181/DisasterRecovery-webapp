@@ -10,7 +10,6 @@ export class TimecardComponent implements OnInit {
 
   public timecards: any;
   errorMsg: any;
-
   constructor(private tcSer: TimecardserviceService, private router:Router) { }
 
   ngOnInit(): void {
@@ -24,4 +23,5 @@ export class TimecardComponent implements OnInit {
   editTimecard(tc:any) {
     this.router.navigate(["/management/editTimecard/", tc.id]);
   }
+ 
 }
