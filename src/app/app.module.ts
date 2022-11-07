@@ -26,6 +26,7 @@ import { ClickActiveDirective } from './drective/click-active.directive';
 import { TimecardSubmissionComponent } from './operationSystem/timecard/timecard-submission/timecard-submission.component';
 import { TimecardViewUpdateComponent } from './operationSystem/timecard/timecard-view-update/timecard-view-update.component';
 import { TimecardCreationComponent } from './operationSystem/timecard/timecard-creation/timecard-creation.component';
+import { ViewDetailsComponent } from './operationSystem/timecard/view-details/view-details.component';
 
 
 
@@ -51,7 +52,8 @@ import { TimecardCreationComponent } from './operationSystem/timecard/timecard-c
     ClickActiveDirective,
     TimecardSubmissionComponent,
     TimecardViewUpdateComponent,
-    TimecardCreationComponent
+    TimecardCreationComponent,
+    ViewDetailsComponent,
   ],
   imports: [
     BrowserModule,

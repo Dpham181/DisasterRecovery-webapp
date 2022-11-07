@@ -16,16 +16,16 @@ handleError(error: HttpErrorResponse) {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
         if(error.status == 409){
-          alert("The record already exits!!")
+          console.error("The record already exits!!")
         }
         if(error.status == 500){
-          alert("Server down")
+          console.error("Server down")
         }
         if(error.status == 400){
-          alert("Requrie to fill up all in input")
+          console.error("Requrie to fill up all in input")
         }
         if(error.status == 404){
-          alert("Not Found")
+          console.error("Not Found")
         }
     }
     return throwError(
