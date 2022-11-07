@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MachineserviceService } from '../service/machineservice.service';
 
@@ -21,7 +21,11 @@ export class CreateMachineFormComponent implements OnInit {
       error: (e) => console.error(e),
       complete: () => console.info('complete') }
     ),
-    this.machineForm = this.fb.group({code: '', description: '', rent: '', hours:''})
+    this.machineForm = this.fb.group({
+    code: ['', [Validators.required, Validators.minLength(2)]], 
+    description: ['', [Validators.required, Validators.minLength(2)]], 
+    rent: ['', [Validators.required]],
+    hours: ['', [Validators.required]]})
   }
 
   onSubmit(machineForm:any)

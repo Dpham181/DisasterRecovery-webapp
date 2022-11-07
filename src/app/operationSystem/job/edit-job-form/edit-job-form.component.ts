@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { JobserviceService } from '../service/jobservice.service';
 
@@ -17,7 +17,10 @@ export class EditJobFormComponent implements OnInit {
   constructor(private actRoute: ActivatedRoute, private jobSer: JobserviceService, private fb:FormBuilder, private router:Router) { }
 
   public editJob = this.fb.group(
-    {code: '', description: '', rate: '', hours:''}
+    {code: ['', [Validators.required, Validators.minLength(2)]], 
+    description: ['', [Validators.required, Validators.minLength(2)]], 
+    rate: ['', [Validators.required]], 
+    hours:['', [Validators.required]]}
   )
   ngOnInit(): void {
   
@@ -29,10 +32,10 @@ export class EditJobFormComponent implements OnInit {
       this.jobs = this.jobSer.getJobById(this.jobId).subscribe(
         (data) => {this.jobs = data; console.log(data);
         this.editJob = this.fb.group( {
-          code: [this.jobs.code], 
-          description: [this.jobs.description], 
-          rate: [this.jobs.rate], 
-          hours: [this.jobs.hours]}
+          code: [this.jobs.code, [Validators.required, Validators.minLength(2)]], 
+          description: [this.jobs.description, [Validators.required, Validators.minLength(2)]], 
+          rate: [this.jobs.rate, [Validators.required]], 
+          hours: [this.jobs.hours, [Validators.required]]}
         );
       },
       (error) => {this.errorMsg = error; console.log(error); }

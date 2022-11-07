@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MachineserviceService } from '../service/machineservice.service';
 
@@ -17,7 +17,10 @@ export class EditMachineFormComponent implements OnInit {
   constructor(private actRoute: ActivatedRoute, private machineSer: MachineserviceService, private fb:FormBuilder, private router:Router) { }
 
   public editMachine = this.fb.group(
-    {code: '', description: '', rent: '', hours:''}
+    {code: ['', [Validators.required, Validators.minLength(2)]], 
+    description: ['', [Validators.required, Validators.minLength(2)]], 
+    rent: ['',[Validators.required]], 
+    hours: ['', [Validators.required]]}
   )
   ngOnInit(): void {
   
@@ -29,10 +32,10 @@ export class EditMachineFormComponent implements OnInit {
       this.machines = this.machineSer.getMachineById(this.machineId).subscribe(
         (data) => {this.machines = data; console.log(data);
         this.editMachine = this.fb.group( {
-          code: [this.machines.code], 
-          description: [this.machines.description], 
-          rent: [this.machines.rent], 
-          hours: [this.machines.hours]}
+          code: [this.machines.code, [Validators.required, Validators.minLength(2)]], 
+          description: [this.machines.description, [Validators.required, Validators.minLength(2)]], 
+          rent: [this.machines.rent, [Validators.required]], 
+          hours: [this.machines.hours, [Validators.required]]}
         );
       },
       (error) => {this.errorMsg = error; console.log(error); }

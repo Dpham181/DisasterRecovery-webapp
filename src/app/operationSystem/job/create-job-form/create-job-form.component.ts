@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JobserviceService } from '../service/jobservice.service';
 
@@ -23,7 +23,11 @@ export class CreateJobFormComponent implements OnInit {
       error: (e) => console.error(e),
       complete: () => console.info('complete') }
     ),
-    this.jobForm = this.fb.group({code: '', description: '', rate: '', hours:''})
+    this.jobForm = this.fb.group({
+      code: ['', [Validators.required, Validators.minLength(2)]], 
+      description: ['',[Validators.required, Validators.minLength(2)]], 
+      rate: ['', [Validators.required]], 
+      hours:['', [Validators.required]]})
   }
 
   onSubmit(jobForm:any)

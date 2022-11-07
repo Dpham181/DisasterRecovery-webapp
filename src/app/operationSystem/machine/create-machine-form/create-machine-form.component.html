@@ -2,31 +2,45 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Job Code</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="code" formControlName="code" placeholder="Job Code">
+          <input type="text" class="form-control" id="code" formControlName="code" placeholder="Job Code" [class.is-invalid]="code.invalid && code.touched">
+          <div *ngIf="code.errors && code.touched">
+            <div class="alert alert-danger" *ngIf="code.errors?.required">Job Code is required</div>
+            <div class="alert alert-danger" *ngIf="code.errors?.minlength">Job Code must be more than 2 characters</div>
+          </div>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Description</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="description" formControlName="description" placeholder="Description">
+          <input type="text" class="form-control" id="description" formControlName="description" placeholder="Description" [class.is-invalid]="description.invalid && description.touched">
+          <div *ngIf="description.errors && description.touched">
+            <div class="alert alert-danger" *ngIf="description.errors?.required">Description is required</div>
+            <div class="alert alert-danger" *ngIf="description.errors?.minlength">Description must be more than 2 characters</div>
+          </div>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Hourly Rate</label>
         <div class="col-sm-4">
-          <input type="number" class="form-control" id="rate" formControlName="rent" placeholder="Hourly Rate">
+          <input type="number" class="form-control" id="rate" formControlName="rent" placeholder="Hourly Rate" [class.is-invalid]="rent.invalid && rent.touched">
+          <div *ngIf="rent.errors && rent.touched">
+            <div class="alert alert-danger" *ngIf="rent.errors?.required">Rent is required</div>
+          </div>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Max Hours Per Day</label>
         <div class="col-sm-4">
-          <input type="number" class="form-control" id="hours" formControlName="hours" placeholder="Max Hours Per Day">
+          <input type="number" class="form-control" id="hours" formControlName="hours" placeholder="Max Hours Per Day" [class.is-invalid]="hours.invalid && hours.touched">
+          <div *ngIf="hours.errors && hours.touched">
+            <div class="alert alert-danger" *ngIf="hours.errors?.required">Hours is required</div>
+          </div>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary" [disabled]="machineForm.invalid">Create</button>
         </div>
       </div>
     
