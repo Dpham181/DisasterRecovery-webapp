@@ -5,7 +5,7 @@
 export const environment = 
 {
     production: true,
-    API_URL: 'http://localhost:8083/',
+    API_URL: 'http://ec2-54-241-210-232.us-west-1.compute.amazonaws.com:8080/DisasterRecovery/',
 };
 
 /*

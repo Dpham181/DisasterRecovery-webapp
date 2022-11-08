@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { timecard } from 'src/model/timecard';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ export class TimecardSubmissionComponent implements OnInit {
 
   public timecards: any;
   errorMsg: any;
-  currenttimecard!: any ;
+  ConvertTimecard:timecard = new timecard();
 
   constructor(private tcSer: TimecardserviceService, private router:Router) { }
 
@@ -23,8 +24,18 @@ export class TimecardSubmissionComponent implements OnInit {
       complete: () => console.info('complete') }
     )
   }
-  viewdetails (currentTC:any){
-    this.currenttimecard= currentTC;
-    this.router.navigate(["/access/Timecardsubmisstion/viewDetails", currentTC])
+  viewdetails (currentTC:number){
+   
+    this.tcSer.getTimecardById(Number(currentTC)).subscribe(
+      {
+        next: (Current_timecard) => 
+        {
+  
+          Object.assign(this.ConvertTimecard,JSON.parse(JSON.stringify(Current_timecard)));
+      },
+      error: (e) => console.error(e),
+      complete: () => console.info('complete')
+    })
+
   }
 }

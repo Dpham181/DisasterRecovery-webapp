@@ -186,7 +186,7 @@ export class TimecardCreationComponent implements OnInit {
     Timecard._amount = AmountTotal
     Timecard._timecardJob=jobs;
     Timecard._timecardMachine= machines;
-
+    Timecard.setDate = new Date();
      Timecard._status = "Open";
 
      console.log(Timecard)

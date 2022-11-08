@@ -1,0 +1,51 @@
+.modal-content{
+    width: fit-content;
+    flex-direction: inherit;
+}
+
+.textoverlay{
+    position: absolute;
+    margin-top: -18px;
+    margin-left: 10px;
+    background: whitesmoke;
+}
+.textoverlayError{
+    position: absolute;
+    margin-top: -18px;
+    margin-left: 10px;
+    color:red;
+    background: whitesmoke;
+}
+.padingtopdiv{
+    margin-top: 20px;
+}
+.form-control{
+
+    border: 0.2px;
+    border-style: solid;
+}
+.buttonoverlay{
+    position: absolute;
+    margin-top: -15px;
+    margin-left: 70%;
+}
+.input{
+    margin-top: 0
+    ;
+}
+.numbersize{
+    size: 1;
+}
+.card-body{
+    flex-direction:column;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+.spacetop{
+    margin-top: 40px;
+}
+.modal-header{
+    display: flex;
+    flex-shrink: 1;
+}
